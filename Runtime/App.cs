@@ -8,20 +8,20 @@ using UnityEngine;
 
 namespace UGS.Runtime
 {
-
-    /// <summary>
-    /// 
-    /// </summary>
+     
     public static class UniGoogleSheets
     {
-        private static int counter = 0;
+        public enum ECodeGen
+        {
+            UnUse = 0,
+            Use = 1,
+            Both = 2
+        } 
         private static TypeMap typeMap;
 
       
-        public static void Initialize()
-        {
-            counter++;
-            Debug.Log(counter);
+        public static void Initialize(ECodeGen codeGen)
+        { 
             typeMap = new TypeMap(); 
         }
 

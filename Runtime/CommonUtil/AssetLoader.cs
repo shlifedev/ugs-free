@@ -8,7 +8,7 @@ using UnityEditor;
 namespace UGS.Runtime
 {
     internal class AssetLoader
-    {
+    { 
         public static T LoadAssetFromResources<T>(string path) where T : UnityEngine.Object
         {
 #if UNITY_EDITOR
