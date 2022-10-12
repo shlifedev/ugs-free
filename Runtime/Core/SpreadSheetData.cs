@@ -15,9 +15,17 @@ namespace UGS.Runtime.Core
 
     [System.Serializable]
     public record Metadata
-    {  
+    {
+        public string Id;   
         public string Namespace;
-        public string FileName; 
+        public string FileName;
+
+        public Metadata(string id, string ns, string fileName)
+        {
+            Id = id;
+            Namespace = ns;
+            FileName = fileName;
+        }
     } 
     [System.Serializable]
     public record Colum

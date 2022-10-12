@@ -8,6 +8,9 @@ namespace UGS.Runtime.Core.Validator
 {
     internal class KeyValidation : ISpreadSheetDataValidator
     {
+        /// <summary>
+        /// 키는 string 혹은 int 타입이어야만 합니다. 
+        /// </summary> 
         public bool Valid(SpreadSheetData data)
         {
             var typeChecker = new TypeMap();  
