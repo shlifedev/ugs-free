@@ -1,45 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using UGS.Runtime.Core.Exceptions;
 using UGS.Runtime.Core.Interfaces;
-using UGS.Runtime.Types;
+using UnityEngine; 
 
 namespace UGS.Runtime.Core
 {
-    public class DeclaredType
+    internal class DeclaredType
     {
+        public  readonly IType Type;
+        private readonly MethodInfo Read;
+        private readonly MethodInfo Write;
+        private readonly PropertyInfo Declares;
+        public Type BaseType => Read.ReturnType;
         public DeclaredType(IType type)
         {
-            this.type = type;
-        }
-        public IType type;
-
+            this.Type = type;
+            Read  = type.GetType().GetMethod("Read");
+            Write = type.GetType().GetMethod("Write");
+            this.Declares = type.GetType().GetProperty("TypeDeclarations"); 
+        }  
         public bool IsEnum()
         {
-            var generics = type.GetType().GenericTypeArguments;
-            if (generics == null || generics.Length == 0) throw new Exception("CanNot Found Generic of IType");
-            return generics[0].IsEnum;
+            return BaseType.IsEnum;
         }
-    } 
-    public class TypeMap
-    { 
-        public Dictionary<string, IType> declares = new Dictionary<string, IType>(); 
-        public void Read()
-        {
-            var subclasses = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                from type in assembly.GetTypes()
-                where type.IsSubclassOf(typeof(IType))
-                select type;
 
+        public List<string> GetDeclares() => Declares.GetValue(Type) as List<string>;
+    }
+
+    internal class TypeMap
+    { 
+        public Dictionary<string, DeclaredType> declares = new Dictionary<string, DeclaredType>();
+        public static IEnumerable<System.Type> GetAllSubclassOf(System.Type parent)
+        {
+            var type = parent;
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p));
+            return types;
+        }
+
+        [InternalInit]
+        public void Read()
+        {  
+            var subclasses = GetAllSubclassOf(typeof(Interfaces.IType));   
             foreach (var type in subclasses)
-            {
-                if (type.IsInterface) continue; 
-                var typeReader = Activator.CreateInstance(type);
-                var read = type.GetMethod("Read");
-                var wrtie = type.GetMethod("Write"); 
-            } 
+            {  
+                if (type.IsClass)
+                {
+                    var typeReader = Activator.CreateInstance(type);
+                    var declaredType = new DeclaredType(typeReader as IType);
+                    var declareKeywords = declaredType.GetDeclares().Distinct();
+                    foreach (var declamation in declareKeywords)
+                    {
+                        var lower = declamation.ToLower();
+                        if (this.declares.ContainsKey(lower))
+                        {
+                            throw new DuplicateDeclareException();
+                            //$"<color=red>{declaredType.Type.GetType().Namespace+"."+ declaredType.Type.GetType().Name}</color>"
+                            // +$" Declare Duplicated Exception :: Already Used Declare Keyword <color=yellow>{declamation}</color> " + $"in {this.declares[lower].Type.GetType().Name}");
+                        }
+                        else
+                        {
+                            this.declares[lower] = declaredType;
+                        }
+                    }
+                } 
+            }
         }
     }
 }

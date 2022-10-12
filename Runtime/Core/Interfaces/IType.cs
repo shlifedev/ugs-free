@@ -8,13 +8,14 @@ namespace UGS.Runtime.Core.Interfaces
 {
     public interface IType
     {
+   
     }
 
     public interface IType<T> : IType
-    {
+    {       
         /// <summary>
         /// All Type Names Auto Convert To Lower. (Int => int), (iNT => int)
-        /// </summary>
+        /// </summary> 
         public List<string> TypeDeclarations { get; }
 
         public T Read(string value);
