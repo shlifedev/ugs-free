@@ -7,13 +7,12 @@ using UGS.Runtime.Core.Interfaces;
 using UnityEngine;
 
 namespace UGS.Runtime.Core.Types
-{ 
-    public class FloatType : IType<float>
+{
+    internal class FloatType : IType<float>
     {
         public List<string> TypeDeclarations => new List<string>()
         {
-            "Int",
-            "Integer"
+            "Float",
         };
 
 

@@ -7,21 +7,21 @@ using UGS.Runtime.Core.Interfaces;
 using UnityEngine;
 
 namespace UGS.Runtime.Core.Types
-{
-    internal class IntType : IType<int>
+{ 
+    internal class StringType : IType<string>
     {
         public List<string> TypeDeclarations => new List<string>()
         {
-            "Int",
-            "Integer"
+            "String",
+            "Text"
         };
 
 
-        public int Read(string value)
+        public string Read(string value)
         {
             try
             {
-                return int.Parse(value);
+                return value;
             }
             catch(Exception err)
             {
@@ -30,7 +30,7 @@ namespace UGS.Runtime.Core.Types
             }
         }
 
-        public string Write(int value)
+        public string Write(string value)
         {
             return value.ToString();
         }

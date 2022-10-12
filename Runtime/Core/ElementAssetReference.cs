@@ -6,13 +6,13 @@ using UnityEngine.UIElements;
 namespace UGS.Runtime
 {
     [System.Serializable]
-    public class ElementAsset
+    internal class ElementAsset
     {
         public string Key;
         public VisualTreeAsset ElementTree;
     }
 
-    public class ElementAssetReference : MonoBehaviour
+    internal class ElementAssetReference : MonoBehaviour
     {
         public List<ElementAsset> assetReferences;
         public VisualTreeAsset Get(string key) => assetReferences.Find(x => x.Key == key)?.ElementTree;

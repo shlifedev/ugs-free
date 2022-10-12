@@ -1,39 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UGS.Runtime.Core.Exceptions;
 using UGS.Runtime.Core.Interfaces;
 using UnityEngine; 
 
 namespace UGS.Runtime.Core
 {
-    internal class DeclaredType
+    internal class TypeMap
     {
-        public  readonly IType Type;
-        private readonly MethodInfo Read;
-        private readonly MethodInfo Write;
-        private readonly PropertyInfo Declares;
-        public Type BaseType => Read.ReturnType;
-        public DeclaredType(IType type)
+        public DeclaredType this[string key]
         {
-            this.Type = type;
-            Read  = type.GetType().GetMethod("Read");
-            Write = type.GetType().GetMethod("Write");
-            this.Declares = type.GetType().GetProperty("TypeDeclarations"); 
-        }  
-        public bool IsEnum()
+            get
+            {
+                return declares[key];
+            }
+        }
+        public DeclaredType this[Type key]
         {
-            return BaseType.IsEnum;
+            get
+            {
+                return declaresWithType[key];
+            }
         }
 
-        public List<string> GetDeclares() => Declares.GetValue(Type) as List<string>;
-    }
-
-    internal class TypeMap
-    { 
-        public Dictionary<string, DeclaredType> declares = new Dictionary<string, DeclaredType>();
-        public static IEnumerable<System.Type> GetAllSubclassOf(System.Type parent)
+        private Dictionary<string, DeclaredType> declares;
+        private Dictionary<Type, DeclaredType> declaresWithType;
+        private static IEnumerable<System.Type> GetAllSubclassOf(System.Type parent)
         {
             var type = parent;
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -41,10 +34,28 @@ namespace UGS.Runtime.Core
                 .Where(p => type.IsAssignableFrom(p));
             return types;
         }
+         
+
+
+        public TypeMap()
+        {
+            Initialize();
+        }
+        public DeclaredType GetDeclare(string key)
+        {
+            return declares[key];
+        }
+        public DeclaredType GetDeclare(Type key)
+        {
+            return declaresWithType[key];
+        }
+
 
         [InternalInit]
-        public void Read()
-        {  
+        public void Initialize()
+        { 
+            declares = new Dictionary<string, DeclaredType>();
+            declaresWithType = new Dictionary<Type, DeclaredType>();
             var subclasses = GetAllSubclassOf(typeof(Interfaces.IType));   
             foreach (var type in subclasses)
             {  
@@ -65,6 +76,7 @@ namespace UGS.Runtime.Core
                         else
                         {
                             this.declares[lower] = declaredType;
+                            this.declaresWithType[declaredType.BaseType] = declaredType;
                         }
                     }
                 } 
