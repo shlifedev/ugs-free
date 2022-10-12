@@ -6,8 +6,19 @@ using System.Threading.Tasks;
 
 namespace UGS.Runtime 
 {
-    internal interface IHttpRequest
+    public class UGSHttpResponse
     {
-    
+        public int ResponseCode;
+        public string Message; 
+        public UGSHttpResponse(int responseCode, string message)
+        {
+            ResponseCode = responseCode;
+            Message = message;
+        }
     }
+    internal interface IHttpRequest
+    { 
+        void Post(string[] headers, string body, System.Action<UGSHttpResponse> callback);
+    }
+
 }
