@@ -1,5 +1,5 @@
 {
-    "name": "com.shlifedev.ugs.Editor",
+    "name": "UniGoogleSheets.Editor",
     "rootNamespace": "UGS.Editor",
     "references": [],
     "includePlatforms": [],

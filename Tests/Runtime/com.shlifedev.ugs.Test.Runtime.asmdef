@@ -1,7 +1,8 @@
 {
-    "name": "com.shlifedev.ugs.Test.Runtime",
+    "name": "UniGoogleSheets.Tests.Runtime",
     "rootNamespace": "UGS.Test",
     "references": [
+        "GUID:012d466d38d4b054783441313fe9abf0",
         "GUID:3f2f9ee761827b34ba1da5788ae97b84"
     ],
     "includePlatforms": [],
