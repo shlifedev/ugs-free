@@ -1,6 +1,8 @@
 {
 	"name" : "com.shlifedev.ugs",
 	"version" : "0.1.0",
-	"displayName": "UniGoogleSheets",
-	"author" : "shlifedev"
+	"displayName": "GoogleSheets",
+	"author" : "shlifedev", 
+	"dependencies": { 
+	}
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace UGS.Runtime.Core
 {
     internal class TypeMap
-    {
+    { 
         public DeclaredType this[string key] => declares[key];
         public DeclaredType this[Type key] => declaresWithType[key];
 
@@ -38,7 +38,7 @@ namespace UGS.Runtime.Core
             return declaresWithType[key];
         }
 
-
+         
         [InternalInit]
         public void Initialize()
         { 
@@ -48,7 +48,7 @@ namespace UGS.Runtime.Core
             foreach (var type in subclasses)
             {  
                 if (type.IsClass)
-                {
+                { 
                     var typeReader = Activator.CreateInstance(type);
                     var declaredType = new DeclaredType(typeReader as IType);
                     var declareKeywords = declaredType.GetDeclares().Distinct();
