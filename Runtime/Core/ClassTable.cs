@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Packages.com.shlifedev.ugs.Editor.Utils
+namespace UGS.Runtime.Core
 {
-    internal class VELoader
+    internal class ClassTable
     {
     }
 }
