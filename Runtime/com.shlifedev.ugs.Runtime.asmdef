@@ -1,6 +1,6 @@
 {
-    "name": "com.shlifedev.ugs.Editor",
-    "rootNamespace": "",
+    "name": "com.shlifedev.ugs.Runtime",
+    "rootNamespace": "UGS.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
