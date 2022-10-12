@@ -17,6 +17,7 @@ namespace UGS.Runtime.Core.Interfaces
     ///
     /// 나중에 제네릭 관련 코드를 모드 object로 변경해도 되지만
     /// 임시로 냅두고 DeclareType을 따로선언해서 처리
+    /// -> 어차피 이 타입들에 대한 값은 코드제네레이터에서 관리할 것 이기 때문에 별 의미 없을듯
     /// <typeparam name="T"></typeparam>
     public interface IType<T> : IType
     {       

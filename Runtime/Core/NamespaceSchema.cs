@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace UGS.Runtime.Core
 {
-    internal class NamespaceSchema
+    public class NamespaceSchema
     {
+        public string Namespace;
+
+        public NamespaceSchema(string ns)
+        {
+            this.Namespace = ns;
+        }
     }
-}
+ 
+} 
