@@ -2,8 +2,7 @@
 using System.IO;
 using System.Text;
 namespace UGS.Editor
-{
-    public class CodeGenerator
+{ public class CodeGenerator
     {
         private readonly string LAST_MARKER = "__END__POINT__";
         private readonly StringBuilder classBuilder = new StringBuilder();
