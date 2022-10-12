@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UGS.Runtime.Packages.com.shlifedev.ugs.Runtime.CommonUtil
+
+namespace UGS.Runtime
 {
     internal class PathUtil
     {
