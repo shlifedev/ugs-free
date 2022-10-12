@@ -11,7 +11,7 @@ namespace UGS.Test
     public class Test : MonoBehaviour
     {
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         { 
             UniGoogleSheets.Initialize(CodegenOption.Both);
              Game.Item.List.ForEach(x =>
@@ -33,12 +33,6 @@ namespace UGS.Test
                 }
             };
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        } 
     }
 }

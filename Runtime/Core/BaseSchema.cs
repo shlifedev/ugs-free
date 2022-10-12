@@ -13,8 +13,7 @@ namespace UGS.Runtime.Core
     { 
         private static SpreadSheetData _sheetData; 
         public void Bind(SpreadSheetData @value)
-        {
-            Debug.Log("called");
+        { 
             List = new List<Model>();
             Dictionary = new NumberableDictionary<Model>();
             SheetData = @value;

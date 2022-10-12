@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UGS.Runtime.Core;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace UGS.Runtime
 {
@@ -27,10 +28,14 @@ namespace UGS.Runtime
         /// </summary>
         /// <param name="option"></param>
         public static void Initialize(CodegenOption option = CodegenOption.Use)
-        { 
+        {
+            Profiler.enabled = true;
             typeMap = new TypeMap();
-            Internal.LoadAllLocalSchemas(); 
+            Profiler.BeginSample("ugs");
+            Internal.LoadAllLocalSchemas();
 
+            Profiler.EndSample(); 
+            Profiler.enabled = false;
         }
 
 
@@ -38,7 +43,7 @@ namespace UGS.Runtime
         {
             public static void LoadAllLocalSchemas()
             {
-                var schemas = AssetLoader.GetAllResourcesSchemasAsData();
+                var schemas = AssetLoader.GetAllResourcesSchemas();
                 foreach (var schema in schemas)
                 {
                     var meta = schema.Meta;
@@ -47,10 +52,7 @@ namespace UGS.Runtime
                     // fake instance for avoid generic
                     var instance = Activator.CreateInstance(type);
                     var method = type.GetMethod("Bind");
-                    method?.Invoke(instance, new object[] { schema });
-
-                    Debug.Log(method); 
-                    Debug.Log("Load => " + fullName);
+                    method?.Invoke(instance, new object[] { schema }); 
                 } 
             }
         }
@@ -85,15 +87,13 @@ namespace UGS.Runtime
 
             public static Assembly GetSchemaAssembly()
             {
-                return AppDomain.CurrentDomain.GetAssemblies()
-                    .First(x => x.FullName.Split(',')[0] == "UniGoogleSheets.Runtime.Schemas");
+                return Assembly.Load("UniGoogleSheets.Runtime.Schemas"); ;
 
             }
 
             public static Assembly GetAssembly()
             {
-                return AppDomain.CurrentDomain.GetAssemblies()
-                    .First(x => x.FullName.Split(',')[0] == "UniGoogleSheets.Runtime");
+                return Assembly.Load("UniGoogleSheets.Runtime"); 
 
             }
         }

@@ -13,16 +13,11 @@ namespace UGS.Runtime
 #if UNITY_EDITOR
             return Resources.Load<T>("@ugs-datas/" + path);
 #endif
-        }
-        public static List<TextAsset> GetAllResourcesSchemas()
+        } 
+        public static IEnumerable<SpreadSheetData> GetAllResourcesSchemas()
         {
             var schemas = Resources.LoadAll<TextAsset>("@ugs-datas/@schemas");
-            return schemas.ToList();
-        }
-        public static List<SpreadSheetData> GetAllResourcesSchemasAsData()
-        {
-            var schemas = Resources.LoadAll<TextAsset>("@ugs-datas/@schemas"); 
-            return schemas.Select(x => JsonUtility.FromJson<SpreadSheetData>(x.text)).ToList();
+            return schemas.Select(x => JsonUtility.FromJson<SpreadSheetData>(x.text));
         }
     }
 }
