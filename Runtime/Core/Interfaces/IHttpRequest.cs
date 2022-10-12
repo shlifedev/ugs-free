@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UGS.Runtime 
+namespace UGS.Runtime.Interfaces
 {
     public class UGSHttpResponse
     {

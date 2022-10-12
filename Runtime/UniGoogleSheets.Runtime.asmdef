@@ -1,5 +1,5 @@
 {
-    "name": "com.shlifedev.ugs.Runtime",
+    "name": "UniGoogleSheets.Runtime",
     "rootNamespace": "UGS.Runtime",
     "references": [],
     "includePlatforms": [],

@@ -1,66 +1,100 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UGS.Runtime.Core;
+using UnityEditor;
 using UnityEngine;
 
 namespace UGS.Runtime
 {
+    public enum CodegenOption
+    {
+        UnUse = 0,
+        Use = 1,
+        Both = 2
+    }
 
-    public class SchemaMap
-    {
-        public Dictionary<Type, ISheetSchema> sheetSchemas = new Dictionary<Type, ISheetSchema>();
-       
-    } 
     public static class UniGoogleSheets
-    {
-        public enum CodegenOption
-        {
-            UnUse = 0,
-            Use = 1,
-            Both = 2
-        } 
+    {  
         private static TypeMap typeMap;
 
       
+        /// <summary>
+        /// 어플리케이션 로드 시점에 호출
+        /// </summary>
+        /// <param name="option"></param>
         public static void Initialize(CodegenOption option = CodegenOption.Use)
         { 
-            typeMap = new TypeMap(); 
+            typeMap = new TypeMap();
+            Internal.LoadAllLocalSchemas(); 
+
         }
 
-        public static T GetSchema<T>()
+
+        static class Internal
         {
-            
-            return default;
-        }
+            public static void LoadAllLocalSchemas()
+            {
+                var schemas = AssetLoader.GetAllResourcesSchemasAsData();
+                foreach (var schema in schemas)
+                {
+                    var meta = schema.Meta;
+                    var fullName = meta.Namespace + "." + meta.FileName;
+                    var type = Utility.GetSchemaAssembly().GetType(fullName);
+                    // fake instance for avoid generic
+                    var instance = Activator.CreateInstance(type);
+                    var method = type.GetMethod("Bind");
+                    method?.Invoke(instance, new object[] { schema });
 
+                    Debug.Log(method); 
+                    Debug.Log("Load => " + fullName);
+                } 
+            }
+        }
+         
 
         public static class Utility
-        {
-            /// <summary> 
-            /// UGS 내에 선언한 타입이 있다면 해당 타입에 대한 Read함수를 호출하여 결과를 반환합니다. 
-            /// </summary> 
-            /// <param name="value">파싱하기 원하는 값</param>
-            /// <returns></returns>
+        { 
             public static T Read<T>(string value)
             {
                 var type = typeof(T);
                 return (T)typeMap[type].Read(value);
             }
-            public static T Read<T>(System.Type type, string value)
+            public static object Read(System.Type type, string value)
             {
-                return (T)typeMap[type].Read(value);
+                return typeMap[type].Read(value);
+            }
+            public static object Read(string declareType, string value)
+            {
+                return typeMap[declareType].Read(value);
             }
 
-            public static string[] KeysOf(SpreadSheetData data)
+            public static List<string> KeysOf(SpreadSheetData data)
             {
-                return data.Columns.First().Values;
+                return data.Columns.First().Values.Select(x => x.ToString()).ToList();
             }
+             
+
             public static Type DeclareToType(string declare)
             {
                 return typeMap[declare].BaseType; 
+            }
+
+            public static Assembly GetSchemaAssembly()
+            {
+                return AppDomain.CurrentDomain.GetAssemblies()
+                    .First(x => x.FullName.Split(',')[0] == "UniGoogleSheets.Runtime.Schemas");
+
+            }
+
+            public static Assembly GetAssembly()
+            {
+                return AppDomain.CurrentDomain.GetAssemblies()
+                    .First(x => x.FullName.Split(',')[0] == "UniGoogleSheets.Runtime");
+
             }
         }
     }

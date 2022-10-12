@@ -14,7 +14,7 @@ namespace UGS.Runtime.Core
 
         private Dictionary<string, DeclaredType> declares;
         private Dictionary<Type, DeclaredType> declaresWithType;
-        private static IEnumerable<System.Type> GetAllSubclassOf(System.Type parent)
+        private IEnumerable<System.Type> GetAllSubclassOf(System.Type parent)
         {
             var type = parent;
             var types = AppDomain.CurrentDomain.GetAssemblies()
