@@ -9,20 +9,8 @@ namespace UGS.Runtime.Core
 {
     internal class TypeMap
     {
-        public DeclaredType this[string key]
-        {
-            get
-            {
-                return declares[key];
-            }
-        }
-        public DeclaredType this[Type key]
-        {
-            get
-            {
-                return declaresWithType[key];
-            }
-        }
+        public DeclaredType this[string key] => declares[key];
+        public DeclaredType this[Type key] => declaresWithType[key];
 
         private Dictionary<string, DeclaredType> declares;
         private Dictionary<Type, DeclaredType> declaresWithType;
