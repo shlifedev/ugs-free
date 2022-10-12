@@ -8,20 +8,19 @@ using UnityEngine;
 
 namespace UGS.Runtime.Core.Types
 {
-    internal class IntType : IType<int>
+    internal class FloatType : IType<float>
     {
         public List<string> TypeDeclarations => new List<string>()
         {
-            "Int",
-            "Integer"
+            "Float",
         };
 
 
-        public int Read(string value)
+        public float Read(string value)
         {
             try
             {
-                return int.Parse(value);
+                return float.Parse(value);
             }
             catch(Exception err)
             {
@@ -30,7 +29,7 @@ namespace UGS.Runtime.Core.Types
             }
         }
 
-        public string Write(int value)
+        public string Write(float value)
         {
             return value.ToString();
         }
