@@ -7,6 +7,7 @@
 @backend~/.env
 @backend~/.nyc_output
 @backend~/*.lock
+@backend~/creds.json
 
 @backend~/build
 @backend~/coverage
