@@ -11,6 +11,8 @@
         <ui:VisualElement name="body" style="flex-grow: 1;">
             <ui:ScrollView />
         </ui:VisualElement>
+        
+        
         <ui:VisualElement name="footer" style="height: 120px; flex-shrink: 0;" />
     </ui:VisualElement>
-</ui:UXML>
+</ui:UXML> 

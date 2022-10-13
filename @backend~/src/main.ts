@@ -1,12 +1,4 @@
-type RequestAction = 
-"getSpreadSheet"
-function myFunction() {
-  var datas = Sheet.toSpreadSheetDatas(
-    "1dTIFRiACz1b74VZmElXIuRw48I2xj56xtIU6MaKKNlw"
-  );
-  var json = JSON.stringify(datas);
-  log(json);
-}
+ 
 
 function test(){
   const response = doPost({
@@ -33,7 +25,7 @@ function doPost(e: any) : IResponse{
   }
   try{ 
   if(action){
-    if(action === "getSpreadSheet") { 
+    if(action === "get-DriveFiles") { 
       var datas = Sheet.toSpreadSheetDatas(params.payload.Id as Id);
       return {
         code : ServerCode.Success,

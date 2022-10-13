@@ -1,6 +1,12 @@
 
 type DriveFileType = "spreadsheet" | "directory" | "unknown"
 type Id = string;
+type RequestAction =
+ "convert-SpreadSheet" | 
+ "create-Row" | 
+ "update-Row" | 
+ "create-Template" | 
+ "get-DriveFiles" 
 
 interface IMetadata{
   FileName : string,

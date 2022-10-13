@@ -40,6 +40,8 @@ namespace UGS.Runtime
 #endif 
         }
 
+        
+
 
         private static class Internal
         {
