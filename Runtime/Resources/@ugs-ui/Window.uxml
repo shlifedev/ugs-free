@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="PathInfo" src="project://database/Packages/com.shlifedev.ugs/Runtime/Resources/@ugs-ui/header/PathInfo.uxml?fileID=9197481963319205126&amp;guid=857550803ffa7d24fafbd15b2f0c9df9&amp;type=3#PathInfo" />
+    <ui:VisualElement name="container" style="width: 100%; height: 100%;">
+        <ui:VisualElement name="header" style="height: 28px; justify-content: flex-start; flex-wrap: nowrap; padding-left: 8px; padding-right: 8px; flex-shrink: 0; flex-direction: row; border-bottom-width: 1px; border-bottom-color: rgba(255, 255, 255, 0.05);">
+            <ui:VisualElement name="header__path" style="justify-content: flex-start; flex-direction: row; align-items: center; flex-wrap: nowrap;">
+                <ui:Instance template="PathInfo" name="PathInfo" style="padding-right: 0; margin-right: 4px;" />
+                <ui:Instance template="PathInfo" name="PathInfo" style="padding-right: 0; margin-right: 4px;" />
+                <ui:Instance template="PathInfo" name="PathInfo" style="padding-right: 0; margin-right: 4px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="body" style="flex-grow: 1;">
+            <ui:ScrollView />
+        </ui:VisualElement>
+        <ui:VisualElement name="footer" style="height: 120px; flex-shrink: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -7,29 +7,35 @@ namespace UGS.Runtime.Core
 {
     internal class DeclaredType
     {
-        public readonly IType Type;
+        private readonly PropertyInfo Declares;
         public readonly Func<object, object> Read;
         public readonly MethodInfo ReadMethodInfo;
+        public readonly IType Type;
         public readonly Func<object, object> Write;
-        private readonly PropertyInfo Declares;
-        public Type BaseType => ReadMethodInfo.ReturnType;
+
         public DeclaredType(IType type)
         {
-            this.Type = type; 
+            Type = type;
             ReadMethodInfo = type.GetType().GetMethod("Read");
-            Read = (value) =>
-            { 
-                var obj = ReadMethodInfo?.Invoke(Type, new object[]{ value });
+            Read = value =>
+            {
+                var obj = ReadMethodInfo?.Invoke(Type, new[] { value });
                 return obj;
             };
             Write = null;
-            this.Declares = type.GetType().GetProperty("TypeDeclarations"); 
-        }  
+            Declares = type.GetType().GetProperty("TypeDeclarations");
+        }
+         
+        public Type BaseType => ReadMethodInfo.ReturnType;
+
         public bool IsEnum()
         {
             return BaseType.IsEnum;
         }
 
-        public List<string> GetDeclares() => Declares.GetValue(Type) as List<string>;
+        public List<string> GetDeclares()
+        {
+            return Declares.GetValue(Type) as List<string>;
+        }
     }
 }

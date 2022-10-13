@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-namespace UGS.Runtime.Core.Validator
+﻿namespace UGS.Runtime.Core.Validator
 {
     internal class RowCountValidation : ISpreadSheetDataValidator
     {
         /// <summary>
-        /// 첫 컬럼과 나머지 컬럼의 벨류 길이가 같은경우 OK
+        ///     첫 컬럼과 나머지 컬럼의 벨류 길이가 같은경우 OK
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -19,9 +12,10 @@ namespace UGS.Runtime.Core.Validator
             if (data.Columns.Count > 0)
             {
                 var firstColumn = data.Columns[0];
-                var diffCheck = data.Columns.Find(x => x.Values.Length != firstColumn.Values.Length); 
-                return (diffCheck == null);
-            } 
+                var diffCheck = data.Columns.Find(x => x.Values.Length != firstColumn.Values.Length);
+                return diffCheck == null;
+            }
+
             return false;
         }
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UGS.Runtime.Core
+﻿namespace UGS.Runtime.Core
 {
     public class NamespaceSchema
     {
@@ -12,8 +6,7 @@ namespace UGS.Runtime.Core
 
         public NamespaceSchema(string ns)
         {
-            this.Namespace = ns;
+            Namespace = ns;
         }
     }
- 
-} 
+}

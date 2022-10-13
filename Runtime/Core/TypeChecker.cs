@@ -7,43 +7,50 @@ using UnityEngine;
 
 namespace UGS.Runtime.Core
 {
-    internal class TypeMap
+    internal class TypeChecker
     { 
-        public DeclaredType this[string key] => declares[key];
-        public DeclaredType this[Type key] => declaresWithType[key];
+        public DeclaredType this[string key] => _declares[key];
+        public DeclaredType this[Type key] => _declaresWithType[key];
 
-        private Dictionary<string, DeclaredType> declares;
-        private Dictionary<Type, DeclaredType> declaresWithType;
+        private static Dictionary<string, DeclaredType> _declares;
+        private static Dictionary<Type, DeclaredType> _declaresWithType;
+         
+        private static IEnumerable<System.Type> _cached;
         private IEnumerable<System.Type> GetAllSubclassOf(System.Type parent)
         {
+            if (_cached != null) return _cached; 
             var type = parent;
-            var types = AppDomain.CurrentDomain.GetAssemblies()
+            _cached = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p));
-            return types;
+
+            return _cached;
         }
          
 
 
-        public TypeMap()
+        public TypeChecker()
         {
             Initialize();
         }
         public DeclaredType GetDeclare(string key)
         {
-            return declares[key];
+            return _declares[key];
         }
         public DeclaredType GetDeclare(Type key)
         {
-            return declaresWithType[key];
+            return _declaresWithType[key];
         }
 
          
         [InternalInit]
         public void Initialize()
-        { 
-            declares = new Dictionary<string, DeclaredType>();
-            declaresWithType = new Dictionary<Type, DeclaredType>();
+        {
+            if (_declares != null && _declaresWithType != null) 
+                return;
+
+            _declares = new Dictionary<string, DeclaredType>();
+            _declaresWithType = new Dictionary<Type, DeclaredType>();
             var subclasses = GetAllSubclassOf(typeof(Interfaces.IType));   
             foreach (var type in subclasses)
             {  
@@ -55,7 +62,7 @@ namespace UGS.Runtime.Core
                     foreach (var declamation in declareKeywords)
                     {
                         var lower = declamation.ToLower();
-                        if (this.declares.ContainsKey(lower))
+                        if (_declares.ContainsKey(lower))
                         {
                             throw new DuplicateDeclareException();
                             //$"<color=red>{declaredType.Type.GetType().Namespace+"."+ declaredType.Type.GetType().Name}</color>"
@@ -63,11 +70,20 @@ namespace UGS.Runtime.Core
                         }
                         else
                         {
-                            this.declares[lower] = declaredType;
-                            this.declaresWithType[declaredType.BaseType] = declaredType;
+                            _declares[lower] = declaredType;
+                            _declaresWithType[declaredType.BaseType] = declaredType;
                         }
                     }
-                } 
+                }
+                // 시트 내에서는 D라 썻지만
+                // 앱에서는 System.Game.D 인경우 
+                if (type.IsEnum)
+                {
+                    var typeReader = Activator.CreateInstance(type);
+                    var declaredType = new DeclaredType(typeReader as IType);
+                    var declareKeywords = declaredType.GetDeclares().Distinct();
+                     
+                }
             }
         }
     }

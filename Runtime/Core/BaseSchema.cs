@@ -7,14 +7,18 @@ using UGS.Runtime.Core;
 using UnityEngine;
 
 namespace UGS.Runtime.Core
-{
+{ 
+    /// <summary>
+    /// code gen 된 클래스들을 깔끔하게 관리하기 위해 (최대한 필드 자동생성을 하지않기위해) 베이스 스키마에 구현을 하고
+    /// 기존 스키마는 Static 공간만 상속을통해 위임받는다.
+    /// </summary>
+    /// <typeparam name="Model"></typeparam>
      
     public class BaseSchema<Model> where Model : class
     { 
         private static SpreadSheetData _sheetData; 
         public void Bind(SpreadSheetData @value)
-        {
-            Debug.Log("called");
+        { 
             List = new List<Model>();
             Dictionary = new NumberableDictionary<Model>();
             SheetData = @value;

@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="PathInfo" class="path-container" style="flex-direction: row; align-items: flex-end;">
+        <ui:VisualElement name="Icon" class="path-icon" style="background-image: url(&apos;project://database/Packages/com.shlifedev.ugs/Runtime/Textures/icon_folder.png?fileID=2800000&amp;guid=5e8a3bca52dd89b4f8db7c6125a38cc3&amp;type=3#icon_folder&apos;); width: 16px; height: 16px; -unity-background-image-tint-color: rgb(255, 174, 85);" />
+        <ui:Label text="Root &gt;" display-tooltip-when-elided="true" name="Label" class="path-text path-label" />
+    </ui:VisualElement>
+</ui:UXML>

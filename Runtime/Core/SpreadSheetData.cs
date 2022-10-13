@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks; 
 
 namespace UGS.Runtime.Core
 {
-    [System.Serializable]
-    public record SpreadSheetData
-    { 
-        public Metadata Meta;
+    [Serializable]
+    public class SpreadSheetData
+    {
         public List<Colum> Columns;
+        public Metadata Meta;
     }
 
-    [System.Serializable]
-    public record Metadata
+    [Serializable]
+    public class Metadata
     {
-        public string Id;   
-        public string Namespace;
         public string FileName;
+        public string Id;
+        public string Namespace;
 
         public Metadata(string id, string ns, string fileName)
         {
@@ -26,9 +23,10 @@ namespace UGS.Runtime.Core
             Namespace = ns;
             FileName = fileName;
         }
-    } 
-    [System.Serializable]
-    public record Colum
+    }
+
+    [Serializable]
+    public class Colum
     {
         public string Name;
         public string Type;
@@ -36,17 +34,9 @@ namespace UGS.Runtime.Core
 
         public Colum(string name, string type, string[] values)
         {
-            this.Name = name;
-            this.Type = type;
-            this.Values = values;
-        }
-    } 
-    public class Test
-    {
-        void Sample()
-        {
-            
+            Name = name;
+            Type = type;
+            Values = values;
         }
     }
 }
- 
