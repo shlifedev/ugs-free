@@ -11,7 +11,7 @@ interface IMetadata{
 interface IColumn{
   Name : string ,
   Type : string ,
-  Values : string[]
+  Values : string[] 
 }
 
 interface SpreadSheetData {
@@ -26,4 +26,4 @@ interface IDriveFile{
 interface IDriveInfo{
   Id : string,
   Files : {}
-}
+} 
