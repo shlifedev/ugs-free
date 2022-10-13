@@ -4,7 +4,7 @@ type Id = string;
 
 interface IMetadata{
   FileName : string,
-  Id : string,
+  GId : Id,
   Namespace : string
 }
 
@@ -14,7 +14,9 @@ interface IColumn{
   Values : string[] 
 }
 
-interface SpreadSheetData {
+interface ISpreadSheetData {
+  Id : Id
+  Namespace : string,
   Meta : IMetadata,
   Columns : IColumn[]
 }  
@@ -27,3 +29,14 @@ interface IDriveInfo{
   Id : string,
   Files : {}
 } 
+enum ServerCode {
+  Success,
+  Error,
+  Exceped
+}
+
+interface IResponse{
+  code : ServerCode,
+  message : string,
+  data : any
+}

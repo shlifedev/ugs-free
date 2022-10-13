@@ -1,5 +1,5 @@
 const disable = false; 
-function log (log: any) {
+function log (log: object | string | number) {
   if (disable) return;
-  return Logger.log(`[UniGoogleSheets] ${log}`);
+  return console.log(`[UniGoogleSheets] ${log}`);
 }; 
