@@ -20,7 +20,7 @@ namespace UGS.Runtime
 
     public static class UniGoogleSheets
     {  
-        private static TypeMap typeMap;
+        private static TypeChecker _typeChecker;
 
       
         /// <summary>
@@ -30,7 +30,7 @@ namespace UGS.Runtime
         public static void Initialize(CodegenOption option = CodegenOption.Use)
         {
             Profiler.enabled = true;
-            typeMap = new TypeMap();
+            _typeChecker = new TypeChecker();
             Profiler.BeginSample("ugs");
             Internal.LoadAllLocalSchemas();
 
@@ -63,15 +63,15 @@ namespace UGS.Runtime
             public static T Read<T>(string value)
             {
                 var type = typeof(T);
-                return (T)typeMap[type].Read(value);
+                return (T)_typeChecker[type].Read(value);
             }
             public static object Read(System.Type type, string value)
             {
-                return typeMap[type].Read(value);
+                return _typeChecker[type].Read(value);
             }
             public static object Read(string declareType, string value)
             {
-                return typeMap[declareType].Read(value);
+                return _typeChecker[declareType].Read(value);
             }
 
             public static List<string> KeysOf(SpreadSheetData data)
@@ -82,7 +82,7 @@ namespace UGS.Runtime
 
             public static Type DeclareToType(string declare)
             {
-                return typeMap[declare].BaseType; 
+                return _typeChecker[declare].BaseType; 
             }
 
             public static Assembly GetSchemaAssembly()

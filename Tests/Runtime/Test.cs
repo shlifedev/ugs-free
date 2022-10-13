@@ -13,25 +13,25 @@ namespace UGS.Test
         // Start is called before the first frame update
         void Start()
         { 
-            UniGoogleSheets.Initialize(CodegenOption.Both);
-             Game.Item.List.ForEach(x =>
-             {
-                 Debug.Log(x.id +"," + x.name);
-             });
+            //UniGoogleSheets.Initialize(CodegenOption.Both);
+            // Game.Item.List.ForEach(x =>
+            // {
+            //     Debug.Log(x.id +"," + x.name);
+            // });
 
 
 
 
-            SpreadSheetData data = new SpreadSheetData()
-            {
-                Meta = new Metadata("1293129321", "Game", "Item"),
-                Columns = new List<Colum>()
-                {
-                    {
-                        new Colum("hi", "int", new string[] {"a", "b"})
-                    }
-                }
-            };
+            //SpreadSheetData data = new SpreadSheetData()
+            //{
+            //    Meta = new Metadata("1293129321", "Game", "Item"),
+            //    Columns = new List<Colum>()
+            //    {
+            //        {
+            //            new Colum("hi", "int", new string[] {"a", "b"})
+            //        }
+            //    }
+            //};
 
         } 
     }

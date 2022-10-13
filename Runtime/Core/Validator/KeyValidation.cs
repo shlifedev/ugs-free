@@ -13,7 +13,7 @@ namespace UGS.Runtime.Core.Validator
         /// </summary> 
         public bool Valid(SpreadSheetData data)
         {
-            var typeChecker = new TypeMap();  
+            var typeChecker = new TypeChecker();  
            
             if (data.Columns.Count == 0)
                 throw new Exception("데이터 내에서 어떠한 컬럼도 찾을 수 없습니다.");

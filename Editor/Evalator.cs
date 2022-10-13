@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditor;
 
-namespace UGS.Runtime.Core.Validator
+namespace UGS.Editor
 {
-    internal interface ISpreadSheetDataValidator
+    internal class Evalator
     {
-         bool Valid(SpreadSheetData data);
+        public static void Eval(string code)
+        { 
+        }
     }
 }

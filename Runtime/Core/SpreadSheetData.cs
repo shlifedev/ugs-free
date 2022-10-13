@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace UGS.Runtime.Core
 {
     [System.Serializable]
-    public record SpreadSheetData
+    public class SpreadSheetData
     { 
         public Metadata Meta;
         public List<Colum> Columns;
     }
 
     [System.Serializable]
-    public record Metadata
+    public class Metadata
     {
         public string Id;   
         public string Namespace;
@@ -28,7 +28,7 @@ namespace UGS.Runtime.Core
         }
     } 
     [System.Serializable]
-    public record Colum
+    public class Colum
     {
         public string Name;
         public string Type;
@@ -40,13 +40,6 @@ namespace UGS.Runtime.Core
             this.Type = type;
             this.Values = values;
         }
-    } 
-    public class Test
-    {
-        void Sample()
-        {
-            
-        }
-    }
+    }  
 }
  
