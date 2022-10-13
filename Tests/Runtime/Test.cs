@@ -9,7 +9,7 @@ using UnityEngine;
 namespace UGS.Test
 {
     public class Test : MonoBehaviour
-    { 
+    {
         void Start()
         {
             UniGoogleSheets.Initialize(CodegenOption.Both);

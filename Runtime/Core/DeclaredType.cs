@@ -25,7 +25,7 @@ namespace UGS.Runtime.Core
             Write = null;
             Declares = type.GetType().GetProperty("TypeDeclarations");
         }
-
+         
         public Type BaseType => ReadMethodInfo.ReturnType;
 
         public bool IsEnum()

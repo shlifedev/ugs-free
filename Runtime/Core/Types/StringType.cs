@@ -7,11 +7,9 @@ namespace UGS.Runtime.Core.Types
 {
     internal class StringType : IType<string>
     {
-        public List<string> TypeDeclarations => new()
-        {
-            "String",
-            "Text"
-        };
+        public List<string> TypeDeclarations => new List<string>() { "String", "Text" };
+
+
 
 
         public string Read(string value)

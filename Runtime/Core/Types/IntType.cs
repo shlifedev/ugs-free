@@ -7,11 +7,7 @@ namespace UGS.Runtime.Core.Types
 {
     internal class IntType : IType<int>
     {
-        public List<string> TypeDeclarations => new()
-        {
-            "Int",
-            "Integer"
-        };
+        public List<string> TypeDeclarations => new List<string>() { "Int", "Number", "Integer" };
 
 
         public int Read(string value)

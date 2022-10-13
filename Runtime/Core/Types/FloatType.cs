@@ -7,10 +7,8 @@ namespace UGS.Runtime.Core.Types
 {
     internal class FloatType : IType<float>
     {
-        public List<string> TypeDeclarations => new()
-        {
-            "Float"
-        };
+        public List<string> TypeDeclarations => new List<string>() { "Float" };
+
 
 
         public float Read(string value)

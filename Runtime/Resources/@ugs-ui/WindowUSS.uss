@@ -2,3 +2,34 @@
 	color : skyblue;
 	font-size : 14px;
 }
+ 
+ 
+
+#file-grid
+ > #file-scrollview
+ > VisualElement
+ > VisualElement 
+ > VisualElement { 
+	display : flex;
+	flex-wrap : wrap; 
+}
+ 
+#file-item{ 	 
+	height : 96px; 
+	width : 96px;
+	display : flex;
+	justify-content: center; 
+	align-items: center;
+	background-color: red; 
+} 
+
+#file-item > #file-icon{  
+	width  : 64px;
+	height : 64px;
+	flex-shrink: 0;
+}
+#file-item > #file-name{   
+	margin : 0 auto;
+	flex-shrink: 0;
+	white-space: normal;  
+}

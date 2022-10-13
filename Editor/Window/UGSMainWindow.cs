@@ -12,13 +12,21 @@ public class UGSMainWindow : EditorWindow
         EditorWindow wnd = GetWindow<UGSMainWindow>();
         wnd.titleContent = new GUIContent("My Custom Editor");
     }
-
+    class Base<T>
+    { 
+        public T somesomething;
+    } 
     public void CreateGUI()
     {
         var asset = Resources.Load<VisualTreeAsset>("@ugs-ui/Window");
         var style = Resources.Load<StyleSheet>("@ugs-ui/WindowUSS");
         var clone = asset.CloneTree();
-        rootVisualElement.Add(clone);
-        clone.styleSheets.Add(style);
+        var container = clone.Query("container").First();
+        rootVisualElement.Add(container);
+        container.styleSheets.Add(style);
+
+
+        var type = typeof(Base<>);
+
     }
 }

@@ -9,8 +9,8 @@ using UnityEngine;
 namespace UGS.Runtime.Core
 { 
     /// <summary>
-    /// code gen 된 클래스들을 깔끔하게 관리하기 위해 베이스 스키마에 구현을 하고
-    /// 기존 스키마는 Static 공간을 상속을통해 위임받는다.
+    /// code gen 된 클래스들을 깔끔하게 관리하기 위해 (최대한 필드 자동생성을 하지않기위해) 베이스 스키마에 구현을 하고
+    /// 기존 스키마는 Static 공간만 상속을통해 위임받는다.
     /// </summary>
     /// <typeparam name="Model"></typeparam>
      
