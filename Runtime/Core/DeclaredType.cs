@@ -5,7 +5,7 @@ using UGS.Runtime.Core.Types;
 
 namespace UGS.Runtime.Core
 {
-    internal class DeclaredType
+    public class DeclaredType
     {
         private readonly PropertyInfo Declares;
         public readonly Func<object, object> Read;

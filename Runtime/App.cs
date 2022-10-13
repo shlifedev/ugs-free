@@ -32,6 +32,7 @@ namespace UGS.Runtime
 #if UNITY_EDITOR
             Profiler.BeginSample("UGS Initialize");
 #endif  
+            _typeChecker = new TypeChecker();
             Internal.LoadAllLocalSchemas(); 
 #if UNITY_EDITOR
             Profiler.EndSample();

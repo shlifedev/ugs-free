@@ -40,10 +40,10 @@ namespace UGS.Test
         { 
 
             UniGoogleSheets.Initialize(CodegenOption.Both);
-            Game.Item.List.ForEach(x =>
-            {
-                Debug.Log(x.id + "," + x.name);
-            });
+            //Game.Item.List.ForEach(x =>
+            //{
+            //    Debug.Log(x.id + "," + x.name);
+            //});
 
 
 
