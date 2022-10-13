@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class UGSMainWindow : EditorWindow
-{ 
+{
     [MenuItem("Tools/My Custom Editor")]
     public static void ShowMyEditor()
     {
@@ -17,9 +15,9 @@ public class UGSMainWindow : EditorWindow
 
     public void CreateGUI()
     {
-        var asset = Resources.Load<VisualTreeAsset>("@ugs-ui/Window"); 
-        var style = Resources.Load<StyleSheet>("@ugs-ui/WindowUSS"); 
-        var clone = asset.CloneTree(); 
+        var asset = Resources.Load<VisualTreeAsset>("@ugs-ui/Window");
+        var style = Resources.Load<StyleSheet>("@ugs-ui/WindowUSS");
+        var clone = asset.CloneTree();
         rootVisualElement.Add(clone);
         clone.styleSheets.Add(style);
     }

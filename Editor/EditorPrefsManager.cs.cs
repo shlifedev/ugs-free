@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEditor;
 
 public static class EditorPrefsManager
 {
@@ -30,5 +28,4 @@ public static class EditorPrefsManager
         key = Application.dataPath + "_" + key;
         EditorPrefs.SetBool(key, !EditorPrefs.GetBool(key));
     }
-
 }

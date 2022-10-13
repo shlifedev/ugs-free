@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UGS.Runtime.Core.Interfaces;
 using UnityEngine;
 
@@ -10,9 +7,9 @@ namespace UGS.Runtime.Core.Types
 {
     internal class FloatType : IType<float>
     {
-        public List<string> TypeDeclarations => new List<string>()
+        public List<string> TypeDeclarations => new()
         {
-            "Float",
+            "Float"
         };
 
 
@@ -22,7 +19,7 @@ namespace UGS.Runtime.Core.Types
             {
                 return float.Parse(value);
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 Debug.LogError($"Failed to parse data => {value}");
                 throw err;

@@ -1,21 +1,24 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UGS.Runtime
 {
-    [System.Serializable]
+    [Serializable]
     internal class ElementAsset
     {
-        public string Key;
         public VisualTreeAsset ElementTree;
+        public string Key;
     }
 
     internal class ElementAssetReference : MonoBehaviour
     {
         public List<ElementAsset> assetReferences;
-        public VisualTreeAsset Get(string key) => assetReferences.Find(x => x.Key == key)?.ElementTree;
+
+        public VisualTreeAsset Get(string key)
+        {
+            return assetReferences.Find(x => x.Key == key)?.ElementTree;
+        }
     }
-      
 }
