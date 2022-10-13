@@ -32,6 +32,7 @@ interface IDriveInfo{
 enum ServerCode {
   Success,
   Error,
+  WrongPassword,
   Exceped
 }
 
