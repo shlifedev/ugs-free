@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "displayName": "UniGoogleSheets",
   "author": "shlifedev",
-  "type": "tool"
+  "type": "tool",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.55"
+  }
 }
