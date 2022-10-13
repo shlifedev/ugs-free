@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UGS.Runtime.Core.Exceptions;
-using UGS.Runtime.Core.Interfaces;
+using UGS.Runtime.Core.Types;
 using UnityEngine; 
 
 namespace UGS.Runtime.Core
@@ -51,7 +51,7 @@ namespace UGS.Runtime.Core
 
             _declares = new Dictionary<string, DeclaredType>();
             _declaresWithType = new Dictionary<Type, DeclaredType>();
-            var subclasses = GetAllSubclassOf(typeof(Interfaces.IType));   
+            var subclasses = GetAllSubclassOf(typeof(IType));   
             foreach (var type in subclasses)
             {  
                 if (type.IsClass)
@@ -75,14 +75,13 @@ namespace UGS.Runtime.Core
                         }
                     }
                 }
-                // 시트 내에서는 D라 썻지만
-                // 앱에서는 System.Game.D 인경우 
+                // 이.. 이넘을.. 어떻게하지..? 쓉..!!
                 if (type.IsEnum)
                 {
                     var typeReader = Activator.CreateInstance(type);
                     var declaredType = new DeclaredType(typeReader as IType);
                     var declareKeywords = declaredType.GetDeclares().Distinct();
-                     
+                    
                 }
             }
         }

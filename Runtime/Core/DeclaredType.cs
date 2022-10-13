@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using UGS.Runtime.Core.Interfaces;
+using UGS.Runtime.Core.Types;
 
 namespace UGS.Runtime.Core
 {

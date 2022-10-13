@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UGS.Runtime.Core.Interfaces
+namespace UGS.Runtime.Core.Types
 {
     public interface IType
     {

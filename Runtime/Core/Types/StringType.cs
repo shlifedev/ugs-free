@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using UGS.Runtime.Core.Interfaces;
+using System.Collections.Generic; 
 using UnityEngine;
 
 namespace UGS.Runtime.Core.Types
