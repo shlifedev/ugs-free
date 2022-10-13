@@ -1,18 +1,18 @@
-*.DS_Store
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.npm
-.env
-.nyc_output
-*.lock
+@backend~/*.DS_Store
+@backend~/*.log
+@backend~/npm-debug.log*
+@backend~/yarn-debug.log*
+@backend~/yarn-error.log*
+@backend~/.npm
+@backend~/.env
+@backend~/.nyc_output
+@backend~/*.lock
 
-build
-coverage
-node_modules
-tmp
-.clasprc.json
+@backend~/build
+@backend~/coverage
+@backend~/node_modules
+@backend~/tmp
+@backend~/.clasprc.json
 
 
 
