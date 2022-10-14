@@ -1,0 +1,29 @@
+.pwd-group{
+  transition: all 0.2s ease-out;
+  display : flex;
+  flex-direction: row;
+  align-items: center; 
+}
+
+.pwd-group__icon{
+  width : 16px;
+  height : 16px;
+  background-image: url("../../../../Textures/icon_folder.png");
+  -unity-background-image-tint-color : orange;
+}
+ 
+
+/* .pwd-group:hover .pwd-group__text{
+  font-size : 14px;
+}  
+.pwd-group:hover .pwd-group__icon{   
+  -unity-background-image-tint-color : rgb(91, 181, 255);
+}   */
+
+.pwd-group:hover{
+  transition: all 0.4s ease-out;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  padding : 0 8px 0 8px;
+}
+ 

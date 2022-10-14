@@ -11,10 +11,10 @@
 .pwd-container{
     display : flex;
     flex-direction: row;
-    height : 30px;
+    height : 100px;
 }
 
  
 .pwd-wrap{
     flex-direction: row;
-}
+} 
