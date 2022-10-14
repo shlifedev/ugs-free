@@ -18,9 +18,5 @@ namespace UGS.Test
     {
         public override List<string> TypeDeclarations => new List<string>(){ "GameState"};
     }
-
-    internal class CustomTypeTest
-    {
-
-    }
+     
 }

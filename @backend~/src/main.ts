@@ -14,7 +14,7 @@ function test(){
 function doPost(e: any) : IResponse{
   const {params, option} = e.parameter; 
   const action = params.action as RequestAction;
-
+  
   var password = PropertiesService.getScriptProperties().getProperty("password");
   if(password){
     if(option.password !== params) return {

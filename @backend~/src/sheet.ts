@@ -9,6 +9,7 @@ namespace Sheet {
     const app = Sheet.open(id); 
     const appName = app.getName();
     const datas : ISpreadSheetData[] = [];
+    
     const sheets = app.getSheets().forEach(s=>{ 
       const meta: IMetadata = {
           Namespace: appName,

@@ -14,6 +14,7 @@
 
         public static string GetPackageEditorPath()
         {
+
             return GetPackagePath() + "/Editor";
         }
 

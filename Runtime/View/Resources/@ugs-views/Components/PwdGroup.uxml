@@ -3,6 +3,6 @@
 	<Style  src="./PwdGroup.uss"></Style> 
   <VisualElement class="pwd-group">  
       <VisualElement class="pwd-group__icon"/>
-      <Label class="pwd-group__text" text="Some >"/>
+      <Label class="pwd-group__text" text="Some >"/> 
   </VisualElement>
 </UXML> 

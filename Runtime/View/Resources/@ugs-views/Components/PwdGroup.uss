@@ -20,10 +20,9 @@
   -unity-background-image-tint-color : rgb(91, 181, 255);
 }   */
 
-.pwd-group:hover{
-  transition: all 0.4s ease-out;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-  padding : 0 8px 0 8px;
-}
- 
+.pwd-group:hover {
+    transition: all 0.4s ease-out;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    padding: 0 8px 0 8px;
+} 
