@@ -1,0 +1,6 @@
+Image {
+    background-image: url("project://database/Packages/com.shlifedev.ugs/Runtime/Textures/icon_folder.png");
+    -unity-background-image-tint-color : rgb(255, 191, 72);
+    width: 64px;
+    height: 64px; 
+}

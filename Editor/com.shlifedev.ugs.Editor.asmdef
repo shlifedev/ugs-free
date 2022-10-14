@@ -2,7 +2,9 @@
     "name": "UniGoogleSheets.Editor",
     "rootNamespace": "UGS.Editor",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

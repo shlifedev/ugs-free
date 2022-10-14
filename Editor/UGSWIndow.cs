@@ -1,8 +1,6 @@
-using UnityEditor;
+using UnityEditor; 
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEditor.UIElements;
-
+using UnityEngine.UIElements; 
 
 public class UGSWIndow : EditorWindow
 {
@@ -16,10 +14,12 @@ public class UGSWIndow : EditorWindow
     public void CreateGUI()
     {
         // Each editor window contains a root VisualElement object
-        VisualElement root = rootVisualElement; 
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.shlifedev.ugs/Runtime/View/UGSWIndow.uxml"); 
-        var clone = visualTree.CloneTree().contentContainer; 
- 
-        root.Add(clone);
+        VisualElement root = rootVisualElement;
+        var visualTree = Resources.LoadAll<VisualTreeAsset>("@ugs-views/");
+        foreach(var print in visualTree)
+        {
+            root.Add(new Label(""));
+            print.CloneTree(root); 
+        } 
     }
 }

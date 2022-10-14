@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" xsi:noNamespaceSchemaLocation="https://shlifedev.github.io/ugs-free/schemas/UIElements.xsd" xsi:schemaLocation="UnityEngine.UIElements https://shlifedev.github.io/ugs-free/schemas/UnityEngine.UIElements.xsd">
+
+  <Style src="./PwdIcon.uss"></Style>
+  <Image></Image> 
+</UXML>
