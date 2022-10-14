@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" noNamespaceSchemaLocation="https://shlifedev.github.io/ugs-free/schemas/UIElements.xsd" schemaLocation="UnityEngine.UIElements https://shlifedev.github.io/ugs-free/schemas/UnityEngine.UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.shlifedev.ugs/Editor/GUI/View/Components/PwdGroup.uss?fileID=7433441132597879392&amp;guid=1d29132f99ecd294bbd936521333dcec&amp;type=3#PwdGroup" />
+    <ui:VisualElement class="pwd-group">
+        <ui:VisualElement class="pwd-group__icon" />
+        <ui:Label text="Some &gt;" class="pwd-group__text" />
+    </ui:VisualElement>
+</ui:UXML>
