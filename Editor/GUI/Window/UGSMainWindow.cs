@@ -14,8 +14,7 @@ public class UGSMainWindow : EditorWindow
     } 
 
     public void CreateGUI()
-    {
-
+    { 
         var window = new Window(this.rootVisualElement);
     }
 } 

@@ -21,7 +21,7 @@ namespace LifeDev.UIElementsExtension
             Classes = classes;
         }
     }
-    public abstract class ElementTreeAssetBase<T> where T : VisualElement
+    public abstract class UIElementComponent<T> where T : VisualElement
     {
         private delegate void CloneTreeDelegate<T0, T1, T2>(T0 target, out T1 a, out T2 b) where T0 : VisualElement;
 
@@ -36,7 +36,7 @@ namespace LifeDev.UIElementsExtension
         //public IStyle Style => Root.style;
         //public VisualElementStyleSheetSet StyleSheets => Root.styleSheets;
         //public string Name => Root.name; 
-        public ElementTreeAssetBase(T target)
+        public UIElementComponent(T target)
         {
             Initialize();
             var cloned = CloneTree(target) as T;
@@ -65,7 +65,7 @@ namespace LifeDev.UIElementsExtension
             if (_cached == null)
                 _cached = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml"));
 
-            if (_cached == null) throw new Exception($"Can't Initialize ElementTreeAssetBase => Cannot Found {ComponentFilePath}.uxml");
+            if (_cached == null) throw new Exception($"Can't Initialize UIElementComponent => Cannot Found {ComponentFilePath}.uxml");
             CloneTreeWithIndex = _cached.CloneTree; 
             CloneTree = (target) =>
             {

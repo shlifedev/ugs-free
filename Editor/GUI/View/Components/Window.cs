@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 namespace UGS.Editor
 {
-    public class Window : ElementTreeAssetBase<VisualElement>
+    public class Window : UIElementComponent<VisualElement>
     {
         [UQuery("window-pwd-container")]
         public VisualElement PwdContainer;
