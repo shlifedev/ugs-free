@@ -1,7 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace UGS.Editor 
+
+namespace LifeDev.UIElementsExtension
 {
     public static class EditorAsset
     {

@@ -1,5 +1,4 @@
- 
-using Packages.ugs_free.Editor.GUI.View.Components;
+  
 using UGS.Editor;
 using UnityEditor;
 using UnityEngine;
