@@ -6,8 +6,8 @@
     xsi:noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd"
 >
 
+	<engine:Style src="Window.uss"></engine:Style>
 	<engine:VisualElement name="root-window">
-		<engine:Style src="Window.uss"></engine:Style>
 		<engine:VisualElement name="window-pwd-container"/>
 	</engine:VisualElement>
 </engine:UXML>

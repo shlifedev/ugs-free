@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -28,7 +29,7 @@ namespace LifeDev.UIElementsExtension
         private static CloneTreeDelegate<VisualElement, int, int> CloneTreeWithIndex { get; set; }
         private static System.Func<VisualElement, VisualElement> CloneTree { get; set; }
 
-        private static VisualTreeAsset _cached;
+        private static Dictionary<Type, VisualTreeAsset> _cached;
         private StyleSheet _cachedStyle;
         private T _root;
 
@@ -62,11 +63,12 @@ namespace LifeDev.UIElementsExtension
         public T Root => _root;  
         void Initialize()
         {
-            if (_cached == null)
-                _cached = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml"));
+            if (_cached == null) _cached = new Dictionary<Type, VisualTreeAsset>();
+            if (!_cached.ContainsKey(this.GetType()))
+                _cached[this.GetType()] = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml"));
 
-            if (_cached == null) throw new Exception($"Can't Initialize UIElementComponent => Cannot Found {ComponentFilePath}.uxml");
-            CloneTreeWithIndex = _cached.CloneTree; 
+            if (!_cached.ContainsKey(this.GetType())) throw new Exception($"Can't Initialize UIElementComponent => Cannot Found {ComponentFilePath}.uxml");
+            CloneTreeWithIndex = _cached[this.GetType()].CloneTree;
             CloneTree = (target) =>
             {
                 int firstElementIndex, added = 0; 
