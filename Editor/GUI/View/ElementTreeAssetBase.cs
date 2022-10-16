@@ -1,20 +1,24 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UIElements;
+using UnityEngine.UIElements; 
 
 namespace UGS.Editor
 {
     /// <summary>
     /// template container 
     /// </summary>
-    public abstract class ElementTreeAssetBase
+    public abstract class ElementTreeAssetBase<T> where T : VisualElement
     {
-        protected VisualTreeAsset _cached;
-        protected VisualElement _root;
+        public delegate void CloneTreeDelegate<T0, T1, T2>(T0 target, out T1 a, out T2 b) where T0 : VisualElement;
+
+        private static CloneTreeDelegate<VisualElement, int, int> CloneTreeWithIndex { get; set; }
+        private static System.Func<VisualElement, VisualElement> CloneTree { get; set; }
+
+        protected static VisualTreeAsset _cached;
+        private StyleSheet _cachedStyle;
+        private T _root;
         public static System.Action<VisualElement> callback;
         public static void RegisterInstantiateCallback(System.Action<VisualElement> callback)
         {
@@ -26,43 +30,35 @@ namespace UGS.Editor
 
         }
 
-        public ElementTreeAssetBase()
+        public ElementTreeAssetBase(T target)
         {
-            Load();
-            _root = Instantiate();
+            Initialize();
+            var ve = CloneTree(target) as T;
+            _root = ve;
         }
 
-        public abstract string UXMLPath { get; }
+        public abstract string ComponentPath { get; }
+        public string ComponentFilePath => Path.GetDirectoryName(ComponentPath) +"/"+ this.GetType().Name;
 
         public VisualElement Root => _root;
-        VisualTreeAsset Load()
+        void Initialize()
         {
             if (_cached == null)
-                _cached = EditorAsset.Load<VisualTreeAsset>(UXMLPath);
+                _cached = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml"));
 
-            if (_cached == null) throw new Exception($"Not found element. {UXMLPath}");
-            return _cached;
-        }
-
-        private VisualElement Instantiate()
-        {
-            if (_root == null)
+            if (_cached == null) throw new Exception($"Can't Initialize ElementTreeAssetBase => Cannot Found {ComponentFilePath}.uxml");
+            CloneTreeWithIndex = _cached.CloneTree; 
+            CloneTree = (target) =>
             {
-                var instance = _cached.CloneTree(); 
-                callback?.Invoke(instance);
-                OnInstantiated();
-                if (instance.Children().Count() != 0)
-                {
-                    var children = instance.Children().First();
-                    if (children.GetClasses().Any(x => x == "root"))
-                    {
-                        return children;
-                    } 
-                }
-
-                return instance;
-            }
-            return _root;
+                int firstElementIndex, added = 0; 
+                CloneTreeWithIndex(target, out firstElementIndex, out added);
+                var content = target.Children().TakeLast(added).First();
+                _root = content as T;
+                return content;
+            };
         }
+
+
+         
     }
 }
