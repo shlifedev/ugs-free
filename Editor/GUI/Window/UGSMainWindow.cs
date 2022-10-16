@@ -23,47 +23,15 @@ public class UGSMainWindow : EditorWindow
         Debug.Log("KeyDown:" + ev.modifiers);
     }
     public void CreateGUI()
-    { 
-        var imguiCointainer = this.rootVisualElement.parent.Query<IMGUIContainer>().Build().First();
-        imguiCointainer.RemoveFromHierarchy();
-        this.rootVisualElement.parent.RemoveFromHierarchy();
-        this.rootVisualElement.parent.style.backgroundColor = new StyleColor(new Color(255,255,255)); 
-        var asset = EditorAsset.Load<VisualTreeAsset>("GUI/View/UGSWindow.uxml");  
-        var style = EditorAsset.Load<StyleSheet>("GUI/View/UGSWindow.uss");
-        asset.CloneTree(rootVisualElement);
-        rootVisualElement.RegisterCallback<KeyUpEvent>(OnKeyDown, TrickleDown.TrickleDown);
-        this.rootVisualElement.RegisterCallback<PointerDownEvent>(callback =>
-        {
-            DragAndDrop.StartDrag("start drag");
-        });
-        this.rootVisualElement.RegisterCallback<PointerUpEvent>(callback =>
-        {
-           
-        });
-        this.rootVisualElement.RegisterCallback<PointerMoveEvent>(callback =>
+    {
+        var window = new UGSWindow(); 
+        rootVisualElement.Add(window.Root.contentContainer);
+        for(int i =0; i < 4; i++)
         {
 
-
-        });
-        this.rootVisualElement.RegisterCallback<DragUpdatedEvent>(callback =>
-        {
-            Debug.Log("A");
-
-        });
-        this.rootVisualElement.RegisterCallback<DragEnterEvent>(callback =>
-        {
-            Debug.Log("callback!");
-            EditorWindow wnd = GetWindow<UGSMainWindow>();
-            wnd.position = new Rect(callback.mousePosition.x, wnd.position.y, wnd.position.width, wnd.position.y);
-
-        });
-        this.rootVisualElement.RegisterCallback<DragExitedEvent>(callback =>
-        {
-            Debug.Log("callback!");
-            EditorWindow wnd = GetWindow<UGSMainWindow>();
-            wnd.position = new Rect(callback.mousePosition.x, wnd.position.y, wnd.position.width, wnd.position.y);
-
-        }); 
-
+            var pwdGroup = new PwdGroup();
+            rootVisualElement.Query(null, "pwd-wrap").First().Add(pwdGroup.Root);
+        }
+         
     }
-}
+} 

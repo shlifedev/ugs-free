@@ -1,18 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" xsi:noNamespaceSchemaLocation="https://shlifedev.github.io/ugs-free/schemas/UIElements.xsd" xsi:schemaLocation="UnityEngine.UIElements https://shlifedev.github.io/ugs-free/schemas/UnityEngine.UIElements.xsd">
-	<Style  src="./UGSWIndow.uss"></Style>
-	<!-- <Template name="PwdIcon" path="@ugs-views/Components/Icon/PwdIcon"/>  -->
-	<Template name="PwdGroup" src="./Components/PwdGroup.uxml"/>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" noNamespaceSchemaLocation="https://shlifedev.github.io/ugs-free/schemas/UIElements.xsd" schemaLocation="UnityEngine.UIElements https://shlifedev.github.io/ugs-free/schemas/UnityEngine.UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="root" class="root">
+	    <Style src="project://database/Packages/com.shlifedev.ugs/Editor/GUI/View/UGSWIndow.uss?fileID=7433441132597879392&amp;guid=49a1d0907d766764f83d405471798f56&amp;type=3#UGSWIndow" />
 
- 
-	<VisualElement class="window">
-		<VisualElement class="pwd-container">
-			<VisualElement class="pwd-wrap"> 
-			</VisualElement>
-		</VisualElement>
-
-		<VisualElement>
-			<Label text="xx"/>
-		</VisualElement>
-	</VisualElement>
-</UXML>
+	    <ui:VisualElement name="pwd-container" class="pwd-container">
+            <ui:VisualElement name="content-contrainer" class="pwd-wrap" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML> 

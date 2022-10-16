@@ -1,20 +1,18 @@
-.pwd-group {
-    transition: all 0.2s ease-out;
+.pwd-wrap {
     display: flex;
     flex-direction: row;
-    align-items: center;
+}
+
+.pwd-wrap :hover {
+
 }
 
 .pwd-group__icon {
-    width: 16px;
-    height: 16px;
-    background-image: url('project://database/Packages/com.shlifedev.ugs/Editor/GUI/Textures/icon_folder.png');
-    -unity-background-image-tint-color: orange;
+    background-image: url('project://database/Packages/com.shlifedev.ugs/Editor/GUI/Textures/icon_folder.png?fileID=2800000&guid=48af7e2b86cb4e74db6747a064e30207&type=3#icon_folder');
+    width: 20px;
+    height: 20px; 
+    -unity-background-image-tint-color: rgba(255, 138, 0, 255);
 }
 
-.pwd-group:hover {
-    transition: all 0.4s ease-out;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    padding: 0 8px 0 8px;
+.pwd-group__text {
 }

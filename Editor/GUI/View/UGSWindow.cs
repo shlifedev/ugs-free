@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UGS.Editor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UGS.Editor
-{ 
-    public class PwdGroup : ElementTreeAssetBase
+{
+    public class UGSWindow : ElementTreeAssetBase
     {
-        public override string UXMLPath => "GUI/View/Components/PwdGroup.uxml"; 
-         
+        public override string UXMLPath => "GUI/View/UGSWindow.uxml"; 
+        public UGSWindow()
+        {
+          
+        }
     }
 }
