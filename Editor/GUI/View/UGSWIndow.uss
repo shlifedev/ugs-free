@@ -1,0 +1,17 @@
+ 
+.window {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pwd-container{
+    display : flex;
+    flex-direction: row; 
+}
+
+ 
+.pwd-wrap{
+    flex-direction: row; 
+} 

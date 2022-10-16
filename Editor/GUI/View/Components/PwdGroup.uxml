@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="PwdContainer" class="root pwd-wrap" style="align-items: center;">
+        <Style src="project://database/Packages/com.shlifedev.ugs/Editor/GUI/View/Components/PwdGroup.uss?fileID=7433441132597879392&amp;guid=1d29132f99ecd294bbd936521333dcec&amp;type=3#PwdGroup" />
+        <ui:Image name="Icon" class="pwd-group__icon" />
+        <ui:Label text="path&gt;" name="PathLabel" class="pwd-group__text" />
+    </ui:VisualElement>
+</ui:UXML>
+ 
