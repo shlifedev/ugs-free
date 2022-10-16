@@ -1,4 +1,5 @@
  
+using Packages.ugs_free.Editor.GUI.View.Components;
 using UGS.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -11,27 +12,11 @@ public class UGSMainWindow : EditorWindow
     { 
         EditorWindow wnd = GetWindow<UGSMainWindow>();
         wnd.titleContent = new GUIContent("My Custom Editor");  
-    }
-    class Base<T>
-    { 
-        public T somesomething;
-    }
-    void OnKeyDown(KeyUpEvent ev)
-    {
-        Debug.Log("KeyDown:" + ev.keyCode);
-        Debug.Log("KeyDown:" + ev.character);
-        Debug.Log("KeyDown:" + ev.modifiers);
-    }
+    } 
+
     public void CreateGUI()
     {
-        var window = new UGSWindow(); 
-        rootVisualElement.Add(window.Root.contentContainer);
-        for(int i =0; i < 4; i++)
-        {
 
-            var pwdGroup = new PwdGroup();
-            rootVisualElement.Query(null, "pwd-wrap").First().Add(pwdGroup.Root);
-        }
-         
+        var window = new Window(this.rootVisualElement);
     }
 } 

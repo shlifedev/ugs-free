@@ -1,0 +1,8 @@
+#root-window {
+    height: 32px;
+    background-color: red;
+}
+#window-pwd-contaier {
+    display: flex;
+    flex-direction: row;
+}
