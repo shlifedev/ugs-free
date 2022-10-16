@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UGS.Editor;
 using UnityEngine.UIElements;
 
-namespace Packages.ugs_free.Editor.GUI.View.Components
+namespace UGS.Editor
 {
     internal class Window : ElementTreeAssetBase<VisualElement>
     {
@@ -14,6 +14,6 @@ namespace Packages.ugs_free.Editor.GUI.View.Components
 
         public Window(VisualElement target) : base(target)
         {
-        }
+        } 
     }
 }

@@ -36,11 +36,12 @@ namespace UGS.Editor
             var ve = CloneTree(target) as T;
             _root = ve;
         }
+         
 
         public abstract string ComponentPath { get; }
         public string ComponentFilePath => Path.GetDirectoryName(ComponentPath) +"/"+ this.GetType().Name;
 
-        public VisualElement Root => _root;
+        public T Root => _root;  
         void Initialize()
         {
             if (_cached == null)
