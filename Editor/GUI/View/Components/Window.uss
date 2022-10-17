@@ -1,7 +1,8 @@
 #root-window {
-    height: 32px; 
+  
 }
-#window-pwd-container{
+
+#window-pwd-container {
     display: flex;
     flex-direction: row; 
 }

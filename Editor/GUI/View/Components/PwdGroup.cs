@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 namespace UGS.Editor
 {
-    public class PwdGroup : UIElementComponent<VisualElement>
+    public class PwdGroup : UIElementComponent 
     {
         public struct Context
         {

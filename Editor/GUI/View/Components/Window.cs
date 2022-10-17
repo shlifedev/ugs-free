@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 namespace UGS.Editor
 {
-    public class Window : UIElementComponent<VisualElement>
+    public class Window : UIElementComponent
     {
         [UQuery("window-pwd-container")]
         public VisualElement PwdContainer;
@@ -19,9 +19,8 @@ namespace UGS.Editor
         {
             for (int i = 0; i < 10; i++)
             {
-                var group = new PwdGroup(this.PwdContainer, new PwdGroup.Context("test")); 
-                //test
-            }
+                var group = new PwdGroup(this.PwdContainer, new PwdGroup.Context("test"));  
+            } 
         } 
     }
 }
