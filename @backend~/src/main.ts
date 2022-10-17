@@ -32,7 +32,7 @@ function doPost(e: any) : IResponse{
       var context = Sheet.getContext(params.payload.Id as Id);
       return { 
         Code : ServerCode.Success,
-        Data : JSON.stringify(context.toDatas()),
+        Data : JSON.stringify(context.datas),
         Message : `Succesfully Generated JSON`
       }
     } 

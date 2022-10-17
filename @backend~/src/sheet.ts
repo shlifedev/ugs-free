@@ -8,12 +8,13 @@ namespace Sheet {
    
   export const getContext = (id: Id) => {
     const spreadSheet = Sheet.open(id);  
+    const _sheets = spreadSheet.getSheets();
      
     const getDatas = (): ISpreadSheetData[] => {
       const app = spreadSheet;
       const appName = app.getName();
       const datas: ISpreadSheetData[] = []; 
-      const sheets = app.getSheets().forEach((s) => {
+      const sheets = _sheets.forEach((s) => {
         const meta: IMetadata = {
           Namespace: appName,
           FileName: s.getName(),
@@ -57,6 +58,22 @@ namespace Sheet {
     const indexOfByName = (name : string, key: string) => {
       return datas.find(x=>x.Meta.FileName == name).Columns[0].Values.indexOf(key);
     }; 
+    const remove = (gid : Id, key : string) => {
+      const sheet = _sheets.find(x => String(x.getSheetId()) == gid);
+      sheet.deleteRow(indexOf(gid, key) + 1);
+    }
+    const add = (gid : Id, key : string, value : string[]) => {
+      const sheet = _sheets.find(x => String(x.getSheetId()) == gid);
+      const has = indexOf(gid, key) !== -1;
+      if(!has){ 
+        const target = datas.find(x=>x.Meta.GId === gid);
+        if(target === null) throw new Error(`${gid} not found in datas`); 
+        if(value.length == datas.find(x=>x.Meta.GId === gid).Columns.length)
+           sheet.appendRow(value)
+        else throw new Error("전달 받은 열의 길이와 시트가 구성하고있는 열의 길이가 다릅니다. 이 문제를 해결하려면 유니티 내에서 Generate를 먼저 호출하십시오.");
+      }
+
+    }
  
     return {
       spreadSheet, 
