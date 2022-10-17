@@ -8,13 +8,13 @@ function test(){
   })
 
   log(JSON.stringify(response));
-} 
+}  
 function testContext(){
   var context = Sheet.getContext("10_CFs1W-uF7ETsrhrmpVX_j4QQMKA7f5gNtLiU3-VU0");
   log(JSON.stringify(context.datas));  
   log(context.indexOf(String(2009728146), 5001));
 }
-function doPost(e: any) : IResponse{
+function post(e: any) : IResponse{
   const {params, option} = e.parameter; 
   const action = params.action as RequestAction;
   
@@ -24,7 +24,7 @@ function doPost(e: any) : IResponse{
       Code : ServerCode.WrongPassword,
       Data : null,
       Message : option.password ? "Wrong Password." :  "If you defined scriptProperties (password) then [parameter.option.password] must be required."
-    }  
+    }   
   }
   try{ 
   if(action){
@@ -59,6 +59,9 @@ function doPost(e: any) : IResponse{
   }
 }
 
+function doPost(e : any){
+  return ContentService.createTextOutput(JSON.stringify(post(e)));
+}
 function doGet(e : any){
-  return JSON.stringify({message:""});
+    return ContentService.createTextOutput("use doPost(e)");
 }

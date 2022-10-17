@@ -52,17 +52,21 @@ namespace Sheet {
       return datas;
     };  
     const datas = getDatas();
+    
     const indexOf = (gid : Id, key: string | number) => {
       return datas.find(x=>x.Meta.GId == gid).Columns[0].Values.indexOf(key as string);
     };
+
     const indexOfByName = (name : string, key: string) => {
       return datas.find(x=>x.Meta.FileName == name).Columns[0].Values.indexOf(key);
     }; 
-    const remove = (gid : Id, key : string) => {
+    
+    const removeRow = (gid : Id, key : string) => {
       const sheet = _sheets.find(x => String(x.getSheetId()) == gid);
       sheet.deleteRow(indexOf(gid, key) + 1);
     }
-    const add = (gid : Id, key : string, value : string[]) => {
+
+    const appendRow = (gid : Id, key : string, value : string[]) => {
       const sheet = _sheets.find(x => String(x.getSheetId()) == gid);
       const has = indexOf(gid, key) !== -1;
       if(!has){ 
