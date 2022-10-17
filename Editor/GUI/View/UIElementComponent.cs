@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,25 +22,30 @@ namespace LifeDev.UIElementsExtension
             Classes = classes;
         }
     }
-    public abstract class ElementTreeAssetBase<T> where T : VisualElement
+    public abstract class UIElementComponent
     {
         private delegate void CloneTreeDelegate<T0, T1, T2>(T0 target, out T1 a, out T2 b) where T0 : VisualElement;
 
         private static CloneTreeDelegate<VisualElement, int, int> CloneTreeWithIndex { get; set; }
         private static System.Func<VisualElement, VisualElement> CloneTree { get; set; }
 
-        private static VisualTreeAsset _cached;
+        private static Dictionary<Type, VisualTreeAsset> _cached;
         private StyleSheet _cachedStyle;
-        private T _root;
+        private VisualElement _root;
+
+        public abstract string ComponentPath { get; }
+        public string ComponentFilePath => Path.GetDirectoryName(ComponentPath) + "/" + this.GetType().Name;
+
+        public VisualElement Root => _root;
 
         //public VisualElement Parent => Root.parent;
         //public IStyle Style => Root.style;
         //public VisualElementStyleSheetSet StyleSheets => Root.styleSheets;
         //public string Name => Root.name; 
-        public ElementTreeAssetBase(T target)
+        public UIElementComponent(VisualElement target)
         {
             Initialize();
-            var cloned = CloneTree(target) as T;
+            var cloned = CloneTree(target) as VisualElement;
             _root = cloned;
 
             var fields = this.GetType().GetFields()
@@ -55,26 +61,37 @@ namespace LifeDev.UIElementsExtension
 
         }
          
-
-        public abstract string ComponentPath { get; }
-        public string ComponentFilePath => Path.GetDirectoryName(ComponentPath) +"/"+ this.GetType().Name;
-
-        public T Root => _root;  
+         
         void Initialize()
         {
-            if (_cached == null)
-                _cached = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml"));
-
-            if (_cached == null) throw new Exception($"Can't Initialize ElementTreeAssetBase => Cannot Found {ComponentFilePath}.uxml");
-            CloneTreeWithIndex = _cached.CloneTree; 
-            CloneTree = (target) =>
+            if (_cached == null) _cached = new Dictionary<Type, VisualTreeAsset>();
+            if (!_cached.ContainsKey(this.GetType()))
             {
-                int firstElementIndex, added = 0; 
-                CloneTreeWithIndex(target, out firstElementIndex, out added);
-                var content = target.Children().TakeLast(added).First();
-                _root = content as T;
-                return content;
-            };
+                _cached[this.GetType()] = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml")); 
+            }
+
+            if (_cached.ContainsKey(this.GetType()))
+            {
+                CloneTreeWithIndex = _cached[this.GetType()].CloneTree;
+                CloneTree = (target) =>
+                {
+                    int firstElementIndex, added = 0;
+                    CloneTreeWithIndex(target, out firstElementIndex, out added);
+                    var content = target.Children().TakeLast(added).First();
+                    _root = content as VisualElement;
+                    return content;
+                }; 
+            }
+            //else
+            //{
+            //    CloneTree = (target) =>
+            //    {
+            //        var content = Activator.CreateInstance(typeof(T)) as T;
+            //        _root = content;
+            //        return content;
+            //    };
+            //}
+ 
         }
 
 

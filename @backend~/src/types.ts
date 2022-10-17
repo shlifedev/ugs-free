@@ -43,7 +43,7 @@ enum ServerCode {
 }
 
 interface IResponse{
-  code : ServerCode,
-  message : string,
-  data : any
+  Code : ServerCode,
+  Message : string,
+  Data : any
 }

@@ -1,0 +1,35 @@
+#container-pwd-group {
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    flex-shrink: 0;
+    padding: 4px;
+     
+}
+
+#pwd-group-icon {
+    background-image: url('project://database/Packages/com.shlifedev.ugs/Editor/GUI/Textures/icon_folder.png?fileID=2800000&guid=48af7e2b86cb4e74db6747a064e30207&type=3#icon_folder');
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    -unity-background-image-tint-color: rgb(255, 185, 0);
+}
+
+#pwd-group-text {
+    font-size: 11px;
+    color: rgba(210, 210, 210, 255);
+}
+
+
+#container-pwd-group:hover {
+    transition: all 0.4s ease-out; 
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#pwd-group-fill {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: all 0.4s ease-out;
+    background-color: rgba(255, 255, 255, 0.2);
+} 

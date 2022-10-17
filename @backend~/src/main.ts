@@ -1,4 +1,3 @@
- 
 
 function test(){
   const response = doPost({
@@ -9,8 +8,12 @@ function test(){
   })
 
   log(JSON.stringify(response));
+} 
+function testContext(){
+  var context = Sheet.getContext("10_CFs1W-uF7ETsrhrmpVX_j4QQMKA7f5gNtLiU3-VU0");
+  log(JSON.stringify(context.datas));  
+  log(context.indexOf(String(2009728146), 5001));
 }
-
 function doPost(e: any) : IResponse{
   const {params, option} = e.parameter; 
   const action = params.action as RequestAction;
@@ -18,40 +21,44 @@ function doPost(e: any) : IResponse{
   var password = PropertiesService.getScriptProperties().getProperty("password");
   if(password){
     if(option.password !== params) return {
-      code : ServerCode.WrongPassword,
-      data : null,
-      message : option.password ? "Wrong Password." :  "If you defined scriptProperties (password) then [parameter.option.password] must be required."
-    }
+      Code : ServerCode.WrongPassword,
+      Data : null,
+      Message : option.password ? "Wrong Password." :  "If you defined scriptProperties (password) then [parameter.option.password] must be required."
+    }  
   }
   try{ 
   if(action){
-    if(action === "get-DriveFiles") { 
-      var datas = Sheet.toSpreadSheetDatas(params.payload.Id as Id);
-      return {
-        code : ServerCode.Success,
-        data : JSON.stringify(datas),
-        message : `Succesfully Generated JSON`
+    if(action === "get-DriveFiles") {  
+      var context = Sheet.getContext(params.payload.Id as Id);
+      return { 
+        Code : ServerCode.Success,
+        Data : JSON.stringify(context.datas),
+        Message : `Succesfully Generated JSON`
       }
     } 
     return {
-      code : ServerCode.Error,
-      data : null,
-      message : `${action} action not found`
+      Code : ServerCode.Error,
+      Data : null,
+      Message : `${action} action not found`
     }
   }
   else{
     return {
-      code : ServerCode.Error,
-      data : null,
-      message : "Require Action"
+      Code : ServerCode.Error,
+      Data : null,
+      Message : "Require Action"
     }
   }
   }
   catch(err : any){ 
     return {
-      code : ServerCode.Exceped,
-      data : null,
-      message : JSON.stringify(err)
+      Code : ServerCode.Exceped,
+      Data : null,
+      Message : JSON.stringify(err)
     }
   }
+}
+
+function doGet(e : any){
+  return JSON.stringify({message:""});
 }
