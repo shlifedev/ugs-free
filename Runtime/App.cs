@@ -4,8 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UGS.Runtime.Core;
 using UGS.Runtime.Core.Attributes;
-using UGS.Runtime.Interfaces;
-using UGS.Runtime.Packages.ugs_free.Runtime.Core;
+using UGS.Runtime.Interfaces; 
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -64,8 +63,7 @@ namespace UGS.Runtime
 #if UNITY_EDITOR
                 Profiler.EndSample();
                 Profiler.enabled = false;
-#endif
-                fetch?.Post(null, null, null);
+#endif 
                 _isLoaded = true;
             }
         }

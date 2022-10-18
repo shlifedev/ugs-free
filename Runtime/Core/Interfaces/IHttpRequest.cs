@@ -18,6 +18,6 @@ namespace UGS.Runtime.Interfaces
 
     internal interface IHttpRequest
     {
-        void Post(string[] headers, string body, Action<UGSHttpResponse> callback);
+        void Post(string url, (string k, string v)[] headers, string body, Action<UGSHttpResponse> callback);
     }
 }
