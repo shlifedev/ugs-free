@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "push": "clasp push"
+  "scripts": { 
+    "dev": "clasp push && clasp deploy -i AKfycbxVD_8snEArj0YMhqz2lunGYnr6nDGtvB4CctxRkRAbXf4d0zGy-HZm--vwcpxbcuys"
   },
   "author": "",
   "license": "ISC",

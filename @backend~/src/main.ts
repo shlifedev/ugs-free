@@ -15,10 +15,11 @@ function testContext(){
   log(context.indexOf(String(2009728146), 5001));
 }
 function post(e: any) : IResponse{
+  try{
   const {params, option} = e.postData;
   const action = params.action as RequestAction;
   const payload = params.payload as any;
-  
+   
   var password = PropertiesService.getScriptProperties().getProperty("password");
   if(password){
     if(option.password !== params) return {
@@ -26,8 +27,7 @@ function post(e: any) : IResponse{
       Data : null,
       Message : option.password ? "Wrong Password." :  "If you defined scriptProperties (password) then [parameter.option.password] must be required."
     }   
-  }
-  try{ 
+  }  
   if(action){
     if(action === "get-DriveFiles") {  
       var context = Sheet.getContext(payload.Id as Id);
@@ -55,7 +55,7 @@ function post(e: any) : IResponse{
     return {
       Code : ServerCode.Exceped,
       Data : null,
-      Message : JSON.stringify(err)
+      Message : `message ${err.message} | stack ${err.stack} | body ${JSON.stringify(e)}`
     }
   }
 }
