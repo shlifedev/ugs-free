@@ -1,6 +1,6 @@
 ﻿namespace UGS.Runtime
 {
-    internal class PathUtil
+    internal static class PathUtil
     {
         public static string GetPackagePath()
         {
