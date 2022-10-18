@@ -4,13 +4,15 @@ namespace UGS.Runtime.Interfaces
 {
     public class UGSHttpResponse
     {
+        public int Code;
         public string Message;
-        public int ResponseCode;
+        public string Data;
 
-        public UGSHttpResponse(int responseCode, string message)
+        public UGSHttpResponse(int code, string message, string data)
         {
-            ResponseCode = responseCode;
+            Code = code;
             Message = message;
+            Data = data;
         }
     }
 

@@ -74,19 +74,14 @@ namespace UGS.Runtime.Core
                         var lower = declamation.ToLower();
                         if (_declares.ContainsKey(lower))
                         {
-                            throw new DuplicateDeclareException();
-                            //$"<color=red>{declaredType.Type.GetType().Namespace+"."+ declaredType.Type.GetType().Name}</color>"
-                            // +$" Declare Duplicated Exception :: Already Used Declare Keyword <color=yellow>{declamation}</color> " + $"in {this.declares[lower].Type.GetType().Name}");
+                            throw new DuplicateDeclareException(); 
                         }
                         else
                         {
                             _declares[lower] = declaredType;
                             _declaresWithType[declaredType.BaseType] = declaredType;
                        }
-                    }
-
-                    Debug.Log(declaredType.BaseType + $" checker loaded {declaredType.GetType()} \n declares : {string.Join(",", declaredType.GetDeclares())}");
-
+                    } 
                 }
             }
         }

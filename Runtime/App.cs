@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using UGS.Runtime.Core;
 using UGS.Runtime.Core.Attributes;
+using UGS.Runtime.Interfaces;
+using UGS.Runtime.Packages.ugs_free.Runtime.Core;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -18,12 +20,12 @@ namespace UGS.Runtime
 
     public static class UniGoogleSheets
     {
+        private static IHttpRequest fetch;
         private static TypeChecker _typeChecker;
         private static bool _isLoaded = false; 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
-        {
-
+        { 
             _isLoaded = false;
         }
 
@@ -33,7 +35,23 @@ namespace UGS.Runtime
         /// <param name="option"></param>
         public static void Initialize(CodegenOption option = CodegenOption.Use)
         {
-            if(_isLoaded){
+            if(!_isLoaded){
+                if (fetch == null)
+                {
+                    /*Editor Mode*/
+                    if (Application.isEditor && Application.isPlaying)
+                    {
+#if UNITY_EDITOR
+                        fetch = new UnityHttpRequest();
+#endif
+                    }
+                    else if (!Application.isEditor && Application.isPlaying) 
+                        fetch = new UnityHttpRequest();
+                    else
+                    {
+                        fetch = new UnityHttpRequest();
+                    }
+                }
 #if UNITY_EDITOR
                 Profiler.enabled = true;
 
@@ -47,6 +65,8 @@ namespace UGS.Runtime
                 Profiler.EndSample();
                 Profiler.enabled = false;
 #endif
+                fetch?.Post(null, null, null);
+                _isLoaded = true;
             }
         }
 
@@ -107,6 +127,8 @@ namespace UGS.Runtime
             /// </summary>
             public static T Read<T>(string value)
             {
+                if (_typeChecker == null)
+                    throw new Exception("Type checker is null, you run UniGoogleSheets.Initialize() before?");
                 var type = typeof(T);
                 return (T)_typeChecker[type].Read(value);
             }
@@ -115,6 +137,9 @@ namespace UGS.Runtime
             /// </summary>
             public static object Read(Type type, string value)
             {
+                if (_typeChecker == null)
+                    throw new Exception("Type checker is null, you run UniGoogleSheets.Initialize() before?");
+
                 return _typeChecker[type].Read(value);
             }
             /// <summary>
@@ -122,6 +147,10 @@ namespace UGS.Runtime
             /// </summary>
             public static object Read(string declareType, string value)
             {
+
+                if (_typeChecker == null)
+                    throw new Exception("Type checker is null, you run UniGoogleSheets.Initialize() before?");
+
                 return _typeChecker[declareType].Read(value);
             }
 
@@ -130,7 +159,7 @@ namespace UGS.Runtime
             /// </summary>
             /// <param name="data"></param>
             public static List<string> KeysOf(SpreadSheetData data)
-            {
+            { 
                 return data.Columns.First().Values.Select(x => x.ToString()).ToList();
             }
 
@@ -139,6 +168,9 @@ namespace UGS.Runtime
             /// </summary>
             public static Type DeclareToType(string declare)
             {
+                if (_typeChecker == null)
+                    throw new Exception("Type checker is null, you run UniGoogleSheets.Initialize() before?");
+
                 return _typeChecker[declare].BaseType;
             }
 
