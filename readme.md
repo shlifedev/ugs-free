@@ -5,6 +5,8 @@
 
 ## Development Setup Guide
 ### Apps Script Push & Deploy 
+ Apps Script를 백엔드로 사용하기위해서는 스크립트를 생성해야합니다. 아래 과정을 그대로 따라하면 됩니다.
+
  NPM 에 전역으로 clasp 설치가 필요합니다.
  ```
  npm i @google/clasp -g
