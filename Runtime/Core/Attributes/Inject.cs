@@ -2,9 +2,9 @@
 
 namespace UGS.Runtime.Core.Attributes
 {
-    public class UGSEnumAttribute : Attribute
+    public class ReflectInject : Attribute
     {
-        public UGSEnumAttribute(Type type)
+        public ReflectInject()
         {
         }
     }
