@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UGS.Runtime
 {
-    internal class AssetLoader
+    internal static class AssetLoader
     { 
         public static IEnumerable<SpreadSheetData> GetAllResourcesSchemas()
         {

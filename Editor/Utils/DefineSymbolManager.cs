@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace UGS.Editor
 {
-    public class DefineSymbolManager
+    public static class DefineSymbolManager
     {
         public static void AddDefineSymbols(params string[] symbols)
         {
