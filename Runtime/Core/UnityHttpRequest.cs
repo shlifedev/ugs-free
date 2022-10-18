@@ -58,7 +58,7 @@ namespace UGS.Runtime
             request.uploadHandler = new UploadHandlerRaw(encodedBody);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             // headers
-            headers.ToList().ForEach(x => { request.SetRequestHeader(x.k, x.v); });
+            headers?.ToList().ForEach(x => { request.SetRequestHeader(x.k, x.v); });
             yield return request.SendWebRequest();
             if (request.responseCode == 200)
             {
