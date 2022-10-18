@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; 
+using System.Linq;
+using UGS.Runtime.Core.Attributes;
+
 namespace UGS.Runtime.Core
 { 
     /// <summary>
@@ -11,8 +13,11 @@ namespace UGS.Runtime.Core
      
     public class BaseSchema<Model> where Model : class
     { 
-        private static SpreadSheetData _sheetData; 
-        public void Bind(SpreadSheetData @value)
+        private static SpreadSheetData _sheetData;
+
+        
+        [ReflectInject]
+        private static void Bind(SpreadSheetData @value)
         {
             List = new List<Model>();
             Dictionary = new NumberableDictionary<Model>();

@@ -6,7 +6,7 @@ using System.Reflection;
 using Codice.CM.Common;
 using UGS.Editor;
 using UnityEngine;
-using UnityEngine.UIElements; 
+using UnityEngine.UIElements;
 
 namespace LifeDev.UIElementsExtension
 {
@@ -41,7 +41,7 @@ namespace LifeDev.UIElementsExtension
         //public VisualElement Parent => Root.parent;
         //public IStyle Style => Root.style;
         //public VisualElementStyleSheetSet StyleSheets => Root.styleSheets;
-        //public string Name => Root.name; 
+        //public string Name => Root.name;
         public UIElementComponent(VisualElement target)
         {
             Initialize();
@@ -53,21 +53,20 @@ namespace LifeDev.UIElementsExtension
             fields.ToList().ForEach(field =>
             {
                 var queryableMeta = field.GetCustomAttribute(typeof(UQueryAttribute)) as UQueryAttribute;
-                var queried = this.Root.parent.Query(queryableMeta.Name, queryableMeta.Classes).First(); 
-                if (queried != null) 
-                    field.SetValue(this, queried); 
+                var queried = this.Root.parent.Query(queryableMeta.Name, queryableMeta.Classes).First();
+                if (queried != null)
+                    field.SetValue(this, queried);
             });
 
-
         }
-         
-         
+
+
         void Initialize()
         {
             if (_cached == null) _cached = new Dictionary<Type, VisualTreeAsset>();
             if (!_cached.ContainsKey(this.GetType()))
             {
-                _cached[this.GetType()] = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml")); 
+                _cached[this.GetType()] = EditorAsset.Load<VisualTreeAsset>(string.Concat(ComponentFilePath, ".uxml"));
             }
 
             if (_cached.ContainsKey(this.GetType()))
@@ -80,7 +79,7 @@ namespace LifeDev.UIElementsExtension
                     var content = target.Children().TakeLast(added).First();
                     _root = content as VisualElement;
                     return content;
-                }; 
+                };
             }
             //else
             //{
@@ -91,10 +90,10 @@ namespace LifeDev.UIElementsExtension
             //        return content;
             //    };
             //}
- 
+
         }
 
 
-         
+
     }
 }

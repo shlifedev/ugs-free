@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UGS.Runtime.Core;
+using UGS.Runtime.Core.Attributes;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -14,28 +15,39 @@ namespace UGS.Runtime
         Use = 1,
         Both = 2
     }
-     
+
     public static class UniGoogleSheets
     {
-        private static TypeChecker _typeChecker; 
+        private static TypeChecker _typeChecker;
+        private static bool _isLoaded = false; 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void Init()
+        {
+
+            _isLoaded = false;
+        }
+
         /// <summary>
         ///     어플리케이션 로드 시점에 호출
         /// </summary>
         /// <param name="option"></param>
         public static void Initialize(CodegenOption option = CodegenOption.Use)
         {
+            if(_isLoaded){
 #if UNITY_EDITOR
-            Profiler.enabled = true;
+                Profiler.enabled = true;
+
 #endif
 #if UNITY_EDITOR
-            Profiler.BeginSample("UGS Initialize");
+                Profiler.BeginSample("UGS Initialize");
 #endif
-            _typeChecker = new TypeChecker();
-            Internal.LoadAllLocalSchemas();
+                _typeChecker = new TypeChecker();
+                Internal.LoadAllLocalSchemas();
 #if UNITY_EDITOR
-            Profiler.EndSample();
-            Profiler.enabled = false;
+                Profiler.EndSample();
+                Profiler.enabled = false;
 #endif
+            }
         }
 
 
@@ -53,9 +65,12 @@ namespace UGS.Runtime
                     var type = Utility.GetSchemaAssembly().GetType(fullName);
                     // fake instance for avoid generic
                     var instance = Activator.CreateInstance(type);
-                    var method = type.GetMethod("Bind");
-                    method?.Invoke(instance, new object[] { schema });
-                    Debug.Log(CodeGen.Generate(schema));
+                    var methods =
+
+                        instance.GetType().GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
+                            .Where(x => x.GetCustomAttribute(typeof(ReflectInject)) != null);
+                    var method = methods.First(); 
+                    method?.Invoke(instance, new object[] { schema }); 
                 }
             }
         }
@@ -83,7 +98,7 @@ namespace UGS.Runtime
             }
         }
 
-        
+
 
         public static class Utility
         {
