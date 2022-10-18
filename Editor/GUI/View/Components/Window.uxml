@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.shlifedev.ugs/Editor/GUI/View/Components/Window.uss?fileID=7433441132597879392&amp;guid=6154af16b755bc94e8b299ff3cde8214&amp;type=3#Window" />
+    <ui:VisualElement name="root-window">
+        <ui:VisualElement name="window-pwd-container" />
+        <ui:VisualElement name="window-content-container">
+            <ui:VisualElement />
+        </ui:VisualElement>
+        <ui:VisualElement name="window-settings" style="position: absolute; bottom: 0;">
+            <ui:Foldout text="Foldout">
+                <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" text="filler text" />
+                <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" text="filler text" />
+            </ui:Foldout>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

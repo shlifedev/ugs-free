@@ -1,18 +1,36 @@
-.pwd-wrap {
-    display: flex;
+#container-pwd-group {
     flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    flex-shrink: 0;
+    padding: 4px;
+    overflow: hidden;
+     
 }
 
-.pwd-wrap :hover {
-
-}
-
-.pwd-group__icon {
+#pwd-group-icon {
     background-image: url('project://database/Packages/com.shlifedev.ugs/Editor/GUI/Textures/icon_folder.png?fileID=2800000&guid=48af7e2b86cb4e74db6747a064e30207&type=3#icon_folder');
-    width: 20px;
-    height: 20px; 
-    -unity-background-image-tint-color: rgba(255, 138, 0, 255);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    -unity-background-image-tint-color: rgb(255, 185, 0);
 }
 
-.pwd-group__text {
+#pwd-group-text {
+    font-size: 11px;
+    color: rgba(210, 210, 210, 255);
 }
+
+
+#container-pwd-group:hover {
+    transition: all 0.4s ease-out; 
+    background-color: rgba(255, 255, 255, 0.2);
+} 
+
+#pwd-group-fill {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    transition: all 0.4s ease-out;
+    background-color: rgba(255, 255, 255, 0.2);
+} 

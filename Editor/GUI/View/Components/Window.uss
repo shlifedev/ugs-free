@@ -1,0 +1,8 @@
+#root-window {
+  
+}
+
+#window-pwd-container {
+    display: flex;
+    flex-direction: row; 
+}
