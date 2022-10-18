@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 
 namespace UGS.Runtime 
 {
-    internal class UnityHttpRequest : IHttpRequest
+    public class UnityHttpRequest : IHttpRequest
     {
         private CoroutineRunner runner;
 
@@ -62,6 +62,7 @@ namespace UGS.Runtime
             yield return request.SendWebRequest();
             if (request.responseCode == 200)
             {
+                Debug.Log(request.downloadHandler.text);
                 var response = JsonUtility.FromJson<UGSHttpResponse>(request.downloadHandler.text);
                 callback?.Invoke(response);
             }

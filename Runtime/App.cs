@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UGS.Runtime.Core;
 using UGS.Runtime.Core.Attributes;
-using UGS.Runtime.Interfaces; 
+using UGS.Runtime.Interfaces;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -21,10 +21,10 @@ namespace UGS.Runtime
     {
         private static IHttpRequest fetch;
         private static TypeChecker _typeChecker;
-        private static bool _isLoaded = false; 
+        private static bool _isLoaded = false;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
-        { 
+        {
             _isLoaded = false;
         }
 
@@ -44,7 +44,7 @@ namespace UGS.Runtime
                         fetch = new UnityHttpRequest();
 #endif
                     }
-                    else if (!Application.isEditor && Application.isPlaying) 
+                    else if (!Application.isEditor && Application.isPlaying)
                         fetch = new UnityHttpRequest();
                     else
                     {
@@ -63,7 +63,7 @@ namespace UGS.Runtime
 #if UNITY_EDITOR
                 Profiler.EndSample();
                 Profiler.enabled = false;
-#endif 
+#endif
                 _isLoaded = true;
             }
         }
@@ -87,8 +87,8 @@ namespace UGS.Runtime
 
                         instance.GetType().GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
                             .Where(x => x.GetCustomAttribute(typeof(ReflectInject)) != null);
-                    var method = methods.First(); 
-                    method?.Invoke(instance, new object[] { schema }); 
+                    var method = methods.First();
+                    method?.Invoke(instance, new object[] { schema });
                 }
             }
         }
@@ -157,7 +157,7 @@ namespace UGS.Runtime
             /// </summary>
             /// <param name="data"></param>
             public static List<string> KeysOf(SpreadSheetData data)
-            { 
+            {
                 return data.Columns.First().Values.Select(x => x.ToString()).ToList();
             }
 
