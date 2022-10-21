@@ -1,23 +1,10 @@
 # ugs-free
-  [old-sheets](https://github.com/shlifedev/ugs-core-old) 재구현
+ 오래전 작성한 UGS를 리팩토링 중. 구현 내용은 거의 동일하지만 `UI Toolkit` 을 적용해서 좀 더 깔끔한 에디터를 만들어보고 싶은게 목표
+
+## Note
+ - 프로젝트 내부에 spreadsheet.v4 , drive.v4 종속성을 추가할 수 있는지 (모바일 플랫폼 빌드 까지 되어야 함) 안되면 그냥 apps script로 작업하는걸로.
+ - 임시로 Resources를 쓰고있는데 Streaming Asset으로 변경 필요
+ - type checker enum 연동테스트, declation 규칙이 필요할듯 
 
 
-
-## Development Setup Guide
-### Apps Script Push & Deploy 
- Apps Script를 백엔드로 사용하기위해서는 스크립트를 생성해야합니다. 아래 과정을 그대로 따라하면 됩니다.
-
- NPM 에 전역으로 clasp 설치가 필요합니다.
- ```
- npm i @google/clasp -g
- ```
- 이후 생성한 스크립트에 
- [here](https://script.google.com) 에서 스크립트 생성후 URL에서 `Script Id` 복사 및 `Apps script API` 활성화
- ```
- clasp login 
- clasp clone [script id] 
- ```
- `deploy`를 `위해 packages.json`에서도 `deployId` 값을 수정해야합니다. 배포된 `deploy`가 없다면 `clasp deploy` 로 먼저 새로운 `deployId` 를 생성하세요.
- ```
-  "dev": "clasp push && clasp deploy -i [deployId]" 
- ```
+ 
