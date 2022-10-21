@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using Packages.ugs_free.Runtime.Core;
 using UGS.Runtime.Core;
 using UGS.Runtime.Core.Attributes;
 using UGS.Runtime.Interfaces;
@@ -19,13 +21,21 @@ namespace UGS.Runtime
 
     public static class UniGoogleSheets
     {
+        private static UGSStream io;
         private static IHttpRequest fetch;
         private static TypeChecker _typeChecker;
         private static bool _isLoaded = false;
+
+
+        private static List<Action<FileStream>> wirteProcessors = new List<Action<FileStream>>(); 
+        private static List<Action<FileStream>> readProcessors = new List<Action<FileStream>>();
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void Init()
-        {
+        static void Clear()
+        { 
             _isLoaded = false;
+            io = null; 
+
+
         }
 
         /// <summary>
@@ -34,7 +44,20 @@ namespace UGS.Runtime
         /// <param name="option"></param>
         public static void Initialize(CodegenOption option = CodegenOption.Use)
         {
-            if(!_isLoaded){
+            if(!_isLoaded)
+            {
+                wirteProcessors.Add((stream) =>
+                {
+                    stream.Position = stream.Length;
+                    stream.WriteByte(0x04);
+                    stream.WriteByte(0x08);
+                    stream.WriteByte(0x04);
+                    stream.WriteByte(0x08);
+                    stream.WriteByte(0x04);
+                    stream.WriteByte(0x08);
+                }); 
+                io = new UGSStream(Application.streamingAssetsPath + "/@ugs", wirteProcessors, readProcessors); 
+                io.Write("app.bin");
                 if (fetch == null)
                 {
                     /*Editor Mode*/
