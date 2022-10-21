@@ -7,25 +7,51 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Packages.ugs_free.Runtime.Core
-{ 
+{
+    public class UGSStreamBuilder
+    {
+        private UGSStream stream = null;
+        public UGSStreamBuilder()
+        {
+            stream = new UGSStream();
+        }
+        public UGSStreamBuilder BasePath(string basePath)
+        {
+            if (System.IO.Directory.Exists(basePath))
+                System.IO.Directory.CreateDirectory(basePath);
+
+            stream.basePath = basePath;
+            return this;
+        }
+        public UGSStreamBuilder AddWriter(Action<FileStream> parser)
+        {
+            stream.parser.Add(parser);
+            return this;
+        }
+        public UGSStreamBuilder AddReader(Action<FileStream> parser)
+        {
+            stream.reader.Add(parser);
+            return this;
+        }
+
+        public UGSStream Build() => stream;
+    }
+
+
     public class UGSStream
     {
-        private List<Action<FileStream>> parser = null;
-        private List<Action<FileStream>> reader = null;
-        private string basePath;
-        public UGSStream(string basePath, List<Action<FileStream>> writePostProcessorActions, List<Action<FileStream>> readPreProcessor)
+        public List<Action<FileStream>> parser = null;
+        public List<Action<FileStream>> reader = null;
+        public string basePath;
+
+        internal UGSStream()
         {
-            if(System.IO.Directory.Exists(basePath))
-               System.IO.Directory.CreateDirectory(basePath);
-    
-            this.basePath = basePath;
-            parser = writePostProcessorActions;
-            reader = readPreProcessor;
         }
 
         private string GetPath(string path) => Path.Combine(basePath, path);
         public byte[] Write(string path)
         {
+            System.IO.Directory.CreateDirectory(GetPath(path));
             byte[] fileData = null;
             using (var stream = Open(GetPath(path)))
             {
@@ -47,7 +73,7 @@ namespace Packages.ugs_free.Runtime.Core
         } 
 
         public byte[] Read(string path)
-        {
+        { 
             byte[] fileData = null;
             using (var stream = Open(GetPath(path)))
             {

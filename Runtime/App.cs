@@ -18,26 +18,36 @@ namespace UGS.Runtime
         Use = 1,
         Both = 2
     }
+    
+
 
     public static class UniGoogleSheets
-    {
+    { 
         private static UGSStream io;
         private static IHttpRequest fetch;
         private static TypeChecker _typeChecker;
         private static bool _isLoaded = false;
 
-
         private static List<Action<FileStream>> wirteProcessors = new List<Action<FileStream>>(); 
         private static List<Action<FileStream>> readProcessors = new List<Action<FileStream>>();
+
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Clear()
         { 
             _isLoaded = false;
             io = null; 
-
-
         }
 
+        private static void WriteProcClearTask(FileStream stream)
+        {
+            stream.SetLength(0);
+        }
+        private static void WriteProcVersionTask(FileStream stream)
+        {
+            var version = new byte[] { 0x02, 0x18, 0x09, 0x18 };
+            stream.Write(version);
+        }
         /// <summary>
         ///     어플리케이션 로드 시점에 호출
         /// </summary>
@@ -46,18 +56,15 @@ namespace UGS.Runtime
         {
             if(!_isLoaded)
             {
-                wirteProcessors.Add((stream) =>
-                {
-                    stream.Position = stream.Length;
-                    stream.WriteByte(0x04);
-                    stream.WriteByte(0x08);
-                    stream.WriteByte(0x04);
-                    stream.WriteByte(0x08);
-                    stream.WriteByte(0x04);
-                    stream.WriteByte(0x08);
-                }); 
-                io = new UGSStream(Application.streamingAssetsPath + "/@ugs", wirteProcessors, readProcessors); 
+                wirteProcessors.Add(WriteProcClearTask);
+                wirteProcessors.Add(WriteProcVersionTask);
+                io = new UGSStreamBuilder().BasePath(Application.streamingAssetsPath + "/@ugs")
+                    .AddWriter(WriteProcClearTask)
+                    .AddWriter(WriteProcVersionTask)
+                    .Build(); 
                 io.Write("app.bin");
+
+
                 if (fetch == null)
                 {
                     /*Editor Mode*/
