@@ -18,25 +18,25 @@ namespace UGS.Runtime
         Use = 1,
         Both = 2
     }
-    
+
 
 
     public static class UniGoogleSheets
-    { 
+    {
         private static UGSStream io;
         private static IHttpRequest fetch;
         private static TypeChecker _typeChecker;
         private static bool _isLoaded = false;
 
-        private static List<Action<FileStream>> wirteProcessors = new List<Action<FileStream>>(); 
+        private static List<Action<FileStream>> wirteProcessors = new List<Action<FileStream>>();
         private static List<Action<FileStream>> readProcessors = new List<Action<FileStream>>();
 
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Clear()
-        { 
+        {
             _isLoaded = false;
-            io = null; 
+            io = null;
         }
 
         private static void WriteProcClearTask(FileStream stream)
@@ -58,10 +58,11 @@ namespace UGS.Runtime
             {
                 wirteProcessors.Add(WriteProcClearTask);
                 wirteProcessors.Add(WriteProcVersionTask);
-                io = new UGSStreamBuilder().BasePath(Application.streamingAssetsPath + "/@ugs")
+                io = new UGSStreamBuilder()
+                    .BasePath(Application.streamingAssetsPath + "/@ugs")
                     .AddWriter(WriteProcClearTask)
                     .AddWriter(WriteProcVersionTask)
-                    .Build(); 
+                    .Build();
                 io.Write("app.bin");
 
 

@@ -46,6 +46,8 @@ namespace Packages.ugs_free.Runtime.Core
 
         internal UGSStream()
         {
+            parser = new List<Action<FileStream>>();
+            reader = new List<Action<FileStream>>();
         }
 
         private string GetPath(string path) => Path.Combine(basePath, path);
@@ -70,10 +72,10 @@ namespace Packages.ugs_free.Runtime.Core
             }
 
             return fileData = Read(path);
-        } 
+        }
 
         public byte[] Read(string path)
-        { 
+        {
             byte[] fileData = null;
             using (var stream = Open(GetPath(path)))
             {
